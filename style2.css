@@ -1,0 +1,86 @@
+
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color:rgb(240,231,231);
+}
+
+.top-bar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  z-index: 1000;
+  width:270px;
+  height:9vh;
+}
+
+.icon {
+  font-size: 18px;
+  color: #444;
+  cursor: pointer;
+}
+
+.profile-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgb(250, 77, 106) ;
+  border-radius: 50%;
+}
+
+.dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 220px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  display: none;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.profile-wrapper:hover .dropdown {
+  display: flex;
+}
+
+.dropdown-header {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.dropdown-item {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f2f2f2;
+  border-radius: 6px;
+  padding-left: 4px;
+}
+
+.logout {
+  color: #e74c3c;
+}
