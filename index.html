@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChEC Sidebar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="sidebar" id="sidebar">
+    <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()" title="Toggle Menu">
+      <img src="assets/collapse_icon.svg" id="menuIcon" alt="Menu Icon">
+    </button>
+
+    <div class="logo">
+      <img class="img2" src="assets/ChEC_logo.jpg"" alt="Logo" />
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-item">Home</div>
+      <div class="nav-item">Contents</div>
+      <div class="dropdown">
+        <div class="nav-dropdown-toggle" onclick="toggleDropdown(this)">
+          Club Verticals
+        </div>
+        <div class="dropdown-menu">
+          <div class="nav-subitem">Ideation Team</div>
+          <div class="nav-subitem">Networking Team</div>
+          <div class="nav-subitem">Digital Media Team</div>
+          <div class="nav-subitem">Event Management Team</div>
+        </div>
+      </div>
+      <div class="nav-item">About Us</div>
+      <div class="nav-item">Contact Us At</div>
+      <div class="nav-item">Useful Links</div>
+      <div class="nav-item">Give Feedback Here</div>
+      <div class="nav-item">Other References</div>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+      <button id="themeSwitch" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+        <div class="theme-toggle-label">
+          <!-- Icon when expanded -->
+          <img id="themeSvgIcon" src="assets/toggle_off.svg" alt="Theme Icon" class="expanded-icon">
+          <!-- Icon only for collapsed mode -->
+          <img src="assets/light_off.png" alt="Collapsed Icon" class="collapsed-icon">
+          <span id="themeText">Dark Theme</span>
+        </div>
+      </button>
+    </div>
+
+    <div class="logout">
+      <img src="assets/logout_icon.svg" alt="Logout Icon" class="logout-icon" />
+      <span class="logout-text">Logout</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
