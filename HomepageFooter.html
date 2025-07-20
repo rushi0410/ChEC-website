@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            font-family: Arial, sans-serif;
+        }
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 85%;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #2D0C0C, #6F0505);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(126, 1, 1, 0.3);
+            margin: 40px auto 30px;
+            color: #DBD8D8;
+        }
+        .stat-item {
+            padding: 20px;
+            height: 60px;
+            background-color: #E2E2E2;
+            color: #2D0C0C;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+        .stat-item h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .stat-item p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #7E0101;
+        }
+        .footer {
+            background-color: #2D0C0C;
+            color: #FFFFFF;
+            padding: 20px 0;
+            text-align: center;
+            width: 99%;
+            border-radius: 10px;
+            margin: auto;
+            margin-bottom: 2px;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #DBD8D8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px #997C7B;
+        }
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+            margin-bottom: 15px;
+        }
+        .footer ul li {
+            margin: 0;
+        }
+        .footer ul li a {
+            color: #C3B5A7;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .footer ul li a:hover {
+            color: #7E0101;
+            text-shadow: 0 0 10px #7E0101;
+        }
+        .why-join {
+            color: #E2E2E2;
+            font-size: 16px;
+            max-width: 650px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #2D0C0C, #6F0505);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(126, 1, 1, 0.3);
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .why-join:hover {
+            transform: scale(1.05);
+        }
+        .why-join h3 {
+            margin: 0 0 10px;
+            color: #FFFFFF;
+            font-size: 22px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #7E0101;
+            display: inline-block;
+        }
+        .why-join ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+        .why-join ul li {
+            margin: 5px 0;
+            position: relative;
+            padding-left: 15px;
+            color: #DBD8D8;
+        }
+        .why-join ul li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #7E0101;
+            font-weight: bold;
+        }
+        .social-icons a {
+            color: #997C7B;
+            font-size: 40px;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #6F0505;
+            transform: rotate(15deg) scale(1.2);
+            box-shadow: 0 0 8px #6F0505;
+        }
+        .footer-bottom {
+            color: #DBD8D8;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stats-container">
+        <div class="stat-item">
+            <h3>10</h3>
+            <p>Faculty</p>
+        </div>
+        <div class="stat-item">
+            <h3>2</h3>
+            <p>Office Staff</p>
+        </div>
+        <div class="stat-item">
+            <h3>1</h3>
+            <p>Technical Staff</p>
+        </div>
+        <div class="stat-item">
+            <h3>x</h3>
+            <p>Department Project Staff</p>
+        </div>
+        <div class="stat-item">
+            <h3>160</h3>
+            <p>Undergraduate Students</p>
+        </div>
+        <div class="stat-item">
+            <h3>10</h3>
+            <p>M.S Research Scholars</p>
+        </div>
+        <div class="stat-item">
+            <h3>30</h3>
+            <p>PhD Research Scholars</p>
+        </div>
+        <div class="stat-item">
+            <h3>x</h3>
+            <p>Professor Of Practices</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <h2>CLUB ACTIVITIES OVERVIEW</h2>
+            <ul>
+                <li><a href="#">Research Projects</a></li>
+                <li><a href="#">Industrial Visits</a></li>
+                <li><a href="#">Guest Talks</a></li>
+                <li><a href="#">Plant Tours</a></li>
+                <li><a href="#">Workshops</a></li>
+                <li><a href="#">Competitions</a></li>
+            </ul>
+            <div class="why-join">
+                <h3>WHY JOIN CHEC?</h3>
+                <ul>
+                    <li>Skill-building</li>
+                    <li>Resume-friendly experiences</li>
+                    <li>Networking with profs + industry</li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <a href="mailto:ch_club@iittp.ac.in" target="_blank"><i class="fas fa-envelope" ></i></a>
+                <a href="https://www.linkedin.com/company/chec-iitt/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/chec_iitt/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="footer-bottom">
+                © 2025 ChEC Club, IIT Tirupati | All Rights Reserved
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
