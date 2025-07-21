@@ -1,0 +1,30 @@
+
+    body {
+      background-image: linear-gradient(to right, #0f172a, #0e7490);
+      font-family: "Montserrat", sans-serif;
+      overflow-x: hidden;
+      color: #e0f7fa;
+    }
+
+    .typing::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
+    /* Sharper logo entrance animation */
+    .logo-container {
+      opacity: 0;
+      transform: translate(300px, -300px) scale(0.5) rotate(10deg);
+      transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .logo-container.show {
+      opacity: 1;
+      transform: translate(20px, -20px) scale(1) rotate(0deg);
+    }
+  
