@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh; /* Changed from height to min-height to allow scrolling */
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -151,6 +151,75 @@
             color: #DBD8D8;
             font-size: 14px;
         }
+
+        /* Media Queries for Mobile Devices */
+        @media screen and (max-width: 768px) {
+            body {
+                min-height: 100%; /* Allow body to expand with content */
+                justify-content: flex-start; /* Start content from top for scrolling */
+                padding-bottom: 20px; /* Add padding to ensure footer is visible */
+            }
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                width: 95%;
+                padding: 30px 15px;
+                gap: 15px;
+                margin: 20px auto;
+                border-radius: 15px;
+            }
+            .stat-item {
+                padding: 15px;
+                height: 50px;
+            }
+            .stat-item h3 {
+                font-size: 20px;
+            }
+            .stat-item p {
+                font-size: 14px;
+            }
+            .footer {
+                padding: 15px 0;
+                width: 95%;
+                border-radius: 8px;
+            }
+            .footer h2 {
+                font-size: 24px;
+                letter-spacing: 1.5px;
+            }
+            .footer ul {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+            .footer ul li a {
+                font-size: 16px;
+            }
+            .why-join {
+                max-width: 90%;
+                padding: 12px;
+                gap: 15px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .why-join h3 {
+                font-size: 20px;
+            }
+            .why-join ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .why-join ul li {
+                font-size: 14px;
+                padding-left: 20px;
+            }
+            .social-icons a {
+                font-size: 32px;
+                margin: 0 8px;
+            }
+            .footer-bottom {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -208,7 +277,7 @@
                 </ul>
             </div>
             <div class="social-icons">
-                <a href="mailto:ch_club@iittp.ac.in" target="_blank"><i class="fas fa-envelope" ></i></a>
+                <a href="mailto:ch_club@iittp.ac.in" target="_blank"><i class="fas fa-envelope"></i></a>
                 <a href="https://www.linkedin.com/company/chec-iitt/" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.instagram.com/chec_iitt/" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
