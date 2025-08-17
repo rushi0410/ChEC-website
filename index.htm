@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professor Profile Page Details</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS (Internal) for styling -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+      background: #7670e6;
+      background: linear-gradient(90deg, rgba(118, 112, 230, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="text-gray-800">
+
+  <!-- Main container to center the content -->
+  <div class="container mx-auto p-4 sm:p-6 lg:p-8 min-h-screen flex items-center justify-center">
+
+    <!-- Static Profile Card with a solid background -->
+    <main class="w-full max-w-6xl bg-white rounded-2xl border border-gray-200 shadow-lg">
+      <div class="p-8 md:p-12">
+
+        <!-- Main Grid Layout -->
+        <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-x-12">
+
+          <!-- Vertical Separator -->
+          <div class="absolute left-0 lg:left-1/3 top-0 h-full w-px bg-gray-200"></div>
+
+          <!-- Left Column: Image and Contact -->
+          <div class="lg:col-span-4 flex flex-col items-center text-center lg:text-left">
+            <!-- Image Container -->
+            <div class="relative z-10 mb-8 fade-in">
+              <img src="https://placehold.co/160x160/4338ca/e0e7ff?text=Prof." alt="Professor's Portrait"
+                class="w-40 h-40 rounded-full object-cover border-4 border-white shadow-md"
+                onerror="this.onerror=null; this.src='https://placehold.co/160x160/333/fff?text=Error';">
+            </div>
+
+            <!-- Contact Info -->
+            <div class="relative z-10 w-full mt-auto fade-in" style="transition-delay: 600ms;">
+              <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-gray-200">
+                <h3 class="text-lg font-semibold text-indigo-800 mb-4">Contact Information</h3>
+                <ul class="space-y-3 text-gray-600">
+                  <li class="flex items-center justify-center lg:justify-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-indigo-600" viewBox="0 0 20 20"
+                      fill="currentColor">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    <span>prof.smtg@iittp.ac.in</span>
+                  </li>
+                  <li class="flex items-center justify-center lg:justify-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-indigo-600" viewBox="0 0 20 20"
+                      fill="currentColor">
+                      <path
+                        d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a11.024 11.024 0 006.254 6.254l.759-1.518a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C6.477 18 2 13.523 2 8V3z" />
+                    </svg>
+                    <span>+91 ##XX##xx##</span>
+                  </li>
+                  <li class="flex items-center justify-center lg:justify-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-indigo-600" viewBox="0 0 24 24"
+                      fill="currentColor">
+                      <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                    <span>linkedin.com/in/prof_username</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Details of Prof. -->
+          <div class="lg:col-span-8 mt-12 lg:mt-0">
+            <!-- Name and Designation -->
+            <div class="fade-in" style="transition-delay: 150ms;">
+              <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Name of Prof.</h1>
+              <p class="mt-2 text-xl md:text-2xl font-medium text-indigo-700">H.O.D of Chemical Engineering Department
+              </p>
+            </div>
+
+            <!-- Bio and Expertise -->
+            <div class="mt-10 space-y-8">
+              <!-- Areas of Interest -->
+              <div class="fade-in" style="transition-delay: 300ms;">
+                <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-gray-200">
+                  <h2 class="text-2xl font-semibold text-gray-900 mb-3">Areas of Interest</h2>
+                  <p class="text-gray-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores numquam ex magni laboriosam
+                    repellat eius officiis nesciunt corrupti, neque sed consectetur aut hic doloremque. Est autem porro
+                    voluptatum ad modi.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Bio & Area of Expertise -->
+              <div class="fade-in" style="transition-delay: 450ms;">
+                <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-gray-200">
+                  <h2 class="text-2xl font-semibold text-gray-900 mb-3">Bio & Area of Expertise</h2>
+                  <p class="text-gray-700 leading-relaxed">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam incidunt eligendi suscipit atque
+                    veniam recusandae voluptas. Culpa, sequi consequatur. Eos sequi optio asperiores. Adipisci accusamus
+                    ducimus at provident quidem excepturi molestiae qui fugiat laborum ab unde non animi, minima quas
+                    voluptatem optio, incidunt ipsam alias asperiores, aliquam vel porro nesciunt illum! Incidunt
+                    doloribus ab non at?
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Latest Publications here-->
+            <div class="mt-10 fade-in" style="transition-delay: 600ms;">
+              <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-gray-200">
+                <h2 class="text-2xl font-semibold text-gray-900 mb-3">Latest Publications</h2>
+                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                  <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures
+                    discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
+                  <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures
+                    discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
+                  <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures
+                    discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // JavaScript for the fade-in effect on elements as they enter the viewport
+    const fadeInElements = document.querySelectorAll('.fade-in');
+
+    // Set up the observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // If the element is intersecting (visible), add the 'visible' class
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    // Observe each element with the 'fade-in' class
+    fadeInElements.forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+
+</html>
