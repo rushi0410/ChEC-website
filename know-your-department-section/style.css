@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: white;
+}
+
+.container {
+    padding: 20px;
+}
+.section-header {
+    background-color: #a44b4b;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 6px;
+    max-width: 900px; /* control width */
+    margin: auto; /* center horizontally */
+}
+.header-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    background: #74200b;
+    color: #fff;
+    border-radius: 8px;
+    display: inline-block; /* 👈 makes it fit content instead of full width */
+    margin-bottom: 15px;
+}
+
+.description {
+    background: #8B2D2D;   /* same color */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 85%;   /* reduce width so it doesn’t touch edges */
+    margin-left: 50px;  /* shift right */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Make sure faculty-cards are always below */
+.faculty-cards {
+    display: flex;
+    justify-content: space-between;  /* spread evenly */
+    flex-wrap: nowrap;               /* prevent wrapping */
+    gap: 20px;                       /* space between cards */
+    margin-bottom: 20px;
+}
+
+/* Individual card */
+.card {
+    background-color: #fff;
+    border: 2px solid #ddd;          /* clear boundary */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* stronger shadow */
+    padding: 20px;
+    flex: 1;                         /* all cards equal width */
+    max-width: 260px;                /* limit card width */
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+.card img {
+    width: 120px;        /* control size */
+    height: 120px;       /* keep same as width */
+    border-radius: 50%;  /* makes it round */
+    object-fit: cover;   /* crops properly without stretching */
+    margin: 10px auto;   /* centers the image */
+    display: block;
+}
+
+/* Faculty info */
+.info {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.info1 {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #444;
+}
+
+/* Read more button */
+.read-more {
+    background-color: #a94442;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 12px;
+    transition: background 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #922d2b;
+}
+
+.know-more-container {
+    display: flex;
+    justify-content: flex-end; /* push right */
+    margin-top: 15px;
+    margin-right: 25px;
+}
+.know-more-card {
+    width: 10px;       /* Reduce width */
+    height: 20px;       /* Auto height */
+    margin-top: auto;   /* Align properly with row */
+    text-align: center; 
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.know-more-btn {
+    background-color: #a94442;
+    color: #fff;
+    padding: 6px 14px;   /* smaller button */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.know-more-btn:hover {
+    background-color: #922d2b;
+}
+
+.read-more, .know-more {
+    background: #b85c5c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.read-more:hover, .know-more:hover {
+    background: #a14f4f;
+}
+
+.info {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.info strong {
+    font-weight: bold;
+}
