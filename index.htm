@@ -135,18 +135,49 @@
               </div>
             </div>
 
-            <!-- Latest Publications here-->
+            <!-- Tab Section -->
             <div class="mt-10 fade-in" style="transition-delay: 600ms;">
               <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-gray-200">
-                <h2 class="text-2xl font-semibold text-gray-900 mb-3">Latest Publications</h2>
-                <ul class="list-disc list-inside text-gray-600 space-y-2">
-                  <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures
-                    discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
-                  <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures
-                    discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
-                  <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures
-                    discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
-                </ul>
+                <div class="mb-6 border-b border-gray-200">
+                  <nav class="flex space-x-4 -mb-px" aria-label="Tabs">
+                    <button data-tab="publications" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-indigo-600 border-indigo-500">
+                      Latest Publications
+                    </button>
+                    <button data-tab="students" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300">
+                      Students
+                    </button>
+                    <button data-tab="phd" class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm text-gray-500 border-transparent hover:text-gray-700 hover:border-gray-300">
+                      PhD Scholars
+                    </button>
+                  </nav>
+                </div>
+
+                <!-- Tab Content -->
+                <div>
+                  <div id="publicationsContent" class="tab-content">
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                      <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
+                      <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
+                      <li>"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, "Granular particle-shape heterogeneous mixtures discharging through a silo", Journal of Fluid Mechanics [2021]."</li>
+                    </ul>
+                  </div>
+                  <div id="studentsContent" class="tab-content hidden">
+                     <ul class="list-disc list-inside text-gray-600 space-y-2">
+                      <li>Student Name 1 - PhD in Chemical Engineering</li>
+                      <li>Student Name 2 - M.Tech in Chemical Engineering</li>
+                      <li>Student Name 3 - B.Tech in Chemical Engineering</li>
+                    </ul>
+                  </div>
+                  <div id="phdContent" class="tab-content hidden">
+                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                      <li>Scholar Name 1 - Researching to solve N-S equations one millenium prize problem :)</li>
+                      <li>Scholar Name 1 - Researching Particle Dynamics</li>
+                      <li>Scholar Name 2 - Researching Computational Fluid Dynamics(CFD)</li>
+                      <li>Scholar Name 3 - Researching Sustainable Polymers</li>
+                    </ul>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -158,11 +189,8 @@
   <script>
     // JavaScript for the fade-in effect on elements as they enter the viewport
     const fadeInElements = document.querySelectorAll('.fade-in');
-
-    // Set up the observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // If the element is intersecting (visible), add the 'visible' class
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
@@ -170,12 +198,38 @@
     }, {
       threshold: 0.1 // Trigger when 10% of the element is visible
     });
-
-    // Observe each element with the 'fade-in' class
     fadeInElements.forEach(el => {
       observer.observe(el);
+    });
+
+    // JavaScript for "Tab functionality!"
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tab = button.dataset.tab;
+
+        // Update button styles
+        tabButtons.forEach(btn => {
+          btn.classList.remove('text-indigo-600', 'border-indigo-500');
+          btn.classList.add('text-gray-500', 'border-transparent', 'hover:text-gray-700', 'hover:border-gray-300');
+        });
+        button.classList.add('text-indigo-600', 'border-indigo-500');
+        button.classList.remove('text-gray-500', 'border-transparent', 'hover:text-gray-700', 'hover:border-gray-300');
+
+        // Update content visibility
+        tabContents.forEach(content => {
+          if (content.id === `${tab}Content`) {
+            content.classList.remove('hidden');
+          } else {
+            content.classList.add('hidden');
+          }
+        });
+      });
     });
   </script>
 </body>
 
 </html>
+
