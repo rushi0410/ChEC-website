@@ -1,0 +1,122 @@
+
+    :root{
+      --bg: #ffffff; /* white background */
+      --card: #f8f8f8; /* light grey card */
+      --muted: #555555; /* dark grey muted text */
+      --text: #2b0000; /* maroon text */
+      --accent: #800000; /* deep maroon */
+      --accent-2: #b22222; /* firebrick/maroon */
+      --ring: #800000; /* maroon highlight */
+      --shadow: 0 10px 30px rgba(0,0,0,.15);
+      --radius: 20px;
+    }
+    *{ box-sizing: border-box }
+    html, body{ height: 100% }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    .wrap{ max-width: 1200px; margin: 0 auto; padding: 28px 20px 80px }
+
+    header{ display: grid; gap: 12px; margin: 24px 0 28px }
+    header h1{
+      font-size: clamp(1.6rem, 2.5vw + 1rem, 2.6rem);
+      margin: 0;
+      letter-spacing: .3px;
+      color: #ffffff;
+    }
+    header .title-box{
+      background: var(--accent);
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: inline-block;
+    }
+    header p{ color: var(--muted); margin: 0; max-width: 60ch }
+
+    .grid{ display: grid; gap: 18px }
+    @media (min-width: 640px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+    @media (min-width: 1024px){ .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)) } }
+
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .25s ease, transform .25s ease;
+      isolation: isolate;
+    }
+    .card:hover{ transform: translateY(-3px); border-color: var(--accent) }
+
+    .card h3{
+      margin: 2px 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: .2px;
+      color: var(--accent);
+    }
+
+    .desc-box{
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .prof-list{ display: flex; flex-direction: column; gap: 12px; margin: 12px 0 16px }
+
+    .prof{
+      display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 14px; padding: 8px;
+    }
+    .avatar{
+      width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex: none;
+      display: grid; place-items: center; position: relative;
+      background: var(--accent);
+      border: 1px solid rgba(0,0,0,.1);
+      color: #ffffff;
+    }
+    .avatar img{ width: 100%; height: 100%; object-fit: cover; display: block }
+    .avatar span{ font-weight: 700; font-size: .95rem; }
+
+    .prof .meta{ min-width: 0 }
+    .prof .name{ font-size: .95rem; font-weight: 600; color: var(--text); }
+    .prof .role{ font-size: .78rem; color: var(--muted); margin-top: 2px }
+
+    .actions{ display: flex; align-items: center; justify-content: space-between; gap: 10px }
+    .btn{
+      appearance: none; cursor: pointer; user-select: none;
+      padding: 10px 14px; border-radius: 12px; border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #ffffff; font-weight: 600; font-size: .9rem;
+      transition: transform .15s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,.25);
+    }
+    .btn:hover{ transform: translateY(-1.5px); background: var(--accent-2) }
+    .btn:focus{ outline: 2px solid var(--ring); outline-offset: 2px }
+
+    .pill{ font-size: .8rem; color: var(--muted) }
+
+    .cta{
+      display: grid; place-items: center; margin: 28px 0 0
+    }
+    .cta .big{
+      padding: 14px 18px; font-size: .98rem; border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #ffffff; font-weight: 800; border: none;
+      box-shadow: 0 16px 40px rgba(178,34,34,.3);
+    }
+    .cta .big:hover{ filter: brightness(1.05) }
+
+    .sr-only{ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
