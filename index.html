@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specific Area of Research</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --color-dark-brown: #2D0C0C;
+            --color-white: #FFFFFF;
+            --color-light-gray: #DBD8D8;
+            --color-dark-gray: #2E2E2E;
+            --color-beige: #C3B5A7;
+            --color-muted-pink: #997C7B;
+            --color-dark-red: #7E0101;
+            --color-darker-red: #6F0505;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, var(--color-light-gray), var(--color-white));
+            color: var(--color-dark-gray);
+        }
+        .app {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(to right, var(--color-darker-red), var(--color-dark-red));
+            color: var(--color-white);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+        }
+        .sections {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .column-header {
+            text-align: center;
+            background: var(--color-muted-pink);
+            color: var(--color-white);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .column-header:hover {
+            background: var(--color-dark-red);
+        }
+        .person-row {
+            display: flex;
+            align-items: center;
+            background: var(--color-white);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            border-left: 5px solid var(--color-muted-pink);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .person-row:nth-child(even) {
+            background: var(--color-beige);
+            border-left: 5px solid var(--color-dark-red);
+        }
+        .person-row:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background: var(--color-light-gray);
+        }
+        .image-container {
+            flex-shrink: 0;
+            width: 150px;
+            height: 150px;
+            margin-right: 20px;
+        }
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background: var(--color-light-gray);
+            color: var(--color-dark-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            text-align: center;
+            border-radius: 10px;
+            border: 2px solid var(--color-dark-gray);
+        }
+        .details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .name {
+            margin: 0 0 5px;
+            font-size: 1.4em;
+            color: var(--color-darker-red);
+        }
+        .contact {
+            margin-bottom: 10px;
+        }
+        .contact strong {
+            color: var(--color-dark-brown);
+        }
+        .contact p {
+            margin: 5px 0;
+        }
+        .contact a {
+            color: var(--color-dark-red);
+            text-decoration: none;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-top: 2px solid var(--color-beige);
+            color: var(--color-dark-gray);
+        }
+        @media (max-width: 768px) {
+            .sections {
+                flex-direction: column;
+            }
+            .person-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .image-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+                width: 100%;
+                height: auto;
+            }
+            .placeholder-image {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .header p {
+                font-size: 1em;
+            }
+            .name {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>Area of Research (name)</h1>
+            <p>Might be the description about that the area of research, exposure or future of it</p>
+        </header>
+        <div class="sections">
+            <div class="column" id="faculties-column">
+                <div class="column-header">List of Faculties</div>
+            </div>
+            <div class="column" id="scholars-column">
+                <div class="column-header">List of PhD Scholars</div>
+            </div>
+            <div class="column" id="students-column">
+                <div class="column-header">List of Students</div>
+            </div>
+        </div>
+        <footer class="footer">
+            <p>&copy; 2025 ChEC Club, IIT Tirupati | All Rights Reserved</p>
+        </footer>
+    </div>
+    <script>
+        const faculties = [
+            { name: "Faculty 1", email: "faculty1@iittp.ac.in", linkedin: "https://www.linkedin.com/in/faculty1", googleScholar: "https://scholar.google.com/citations?user=example" },
+            { name: "Faculty 2", email: "faculty2@iittp.ac.in", linkedin: "https://www.linkedin.com/in/faculty2", googleScholar: "https://scholar.google.com/citations?user=example2" },
+            { name: "Faculty 3", email: "faculty3@iittp.ac.in", linkedin: "https://www.linkedin.com/in/faculty3", googleScholar: "https://scholar.google.com/citations?user=example3" }
+        ];
+        const scholars = [
+            { name: "Scholar 1", email: "scholar1@iittp.ac.in", linkedin: "https://www.linkedin.com/in/scholar1" },
+            { name: "Scholar 2", email: "scholar2@iittp.ac.in", linkedin: "https://www.linkedin.com/in/scholar2" },
+            { name: "Scholar 3", email: "scholar3@iittp.ac.in", linkedin: "https://www.linkedin.com/in/scholar3" }
+        ];
+        const students = [
+            { name: "Student 1", email: "student1@iittp.ac.in", linkedin: "https://www.linkedin.com/in/student1" },
+            { name: "Student 2", email: "student2@iittp.ac.in", linkedin: "https://www.linkedin.com/in/student2" },
+            { name: "Student 3", email: "student3@iittp.ac.in", linkedin: "https://www.linkedin.com/in/student3" }
+        ];
+        const facultiesColumn = document.getElementById('faculties-column');
+        const scholarsColumn = document.getElementById('scholars-column');
+        const studentsColumn = document.getElementById('students-column');
+        faculties.forEach(faculty => {
+            const row = document.createElement('div');
+            row.className = 'person-row';
+            row.innerHTML = `
+                <div class="image-container">
+                    <div class="placeholder-image">Image</div>
+                </div>
+                <div class="details">
+                    <h2 class="name">${faculty.name}</h2>
+                    <div class="contact">
+                        <p><i class="fas fa-address-book"></i> <strong>Contact:</strong></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:${faculty.email}">${faculty.email}</a></p>
+                        <p><i class="fas fa-book"></i> <a href="${faculty.googleScholar}" target="_blank">Google Scholar</a></p>
+                        <p><i class="fab fa-linkedin"></i> <a href="${faculty.linkedin}" target="_blank">LinkedIn</a></p>
+                    </div>
+                </div>
+            `;
+            facultiesColumn.appendChild(row);
+        });
+        scholars.forEach(scholar => {
+            const row = document.createElement('div');
+            row.className = 'person-row';
+            row.innerHTML = `
+                <div class="image-container">
+                    <div class="placeholder-image">Image</div>
+                </div>
+                <div class="details">
+                    <h2 class="name">${scholar.name}</h2>
+                    <div class="contact">
+                        <p><i class="fas fa-address-book"></i> <strong>Contact:</strong></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:${scholar.email}">${scholar.email}</a></p>
+                        <p><i class="fab fa-linkedin"></i> <a href="${scholar.linkedin}" target="_blank">LinkedIn</a></p>
+                    </div>
+                </div>
+            `;
+            scholarsColumn.appendChild(row);
+        });
+        students.forEach(student => {
+            const row = document.createElement('div');
+            row.className = 'person-row';
+            row.innerHTML = `
+                <div class="image-container">
+                    <div class="placeholder-image">Image</div>
+                </div>
+                <div class="details">
+                    <h2 class="name">${student.name}</h2>
+                    <div class="contact">
+                        <p><i class="fas fa-address-book"></i> <strong>Contact:</strong></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:${student.email}">${student.email}</a></p>
+                        <p><i class="fab fa-linkedin"></i> <a href="${student.linkedin}" target="_blank">LinkedIn</a></p>
+                    </div>
+                </div>
+            `;
+            studentsColumn.appendChild(row);
+        });
+    </script>
+</body>
+</html>
