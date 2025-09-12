@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Research Areas</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      /* background-color: #e9ebee; */
+      background: #e2eef4;
+      /* fallback for old browsers */
+      /* background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); */
+      /* Chrome 10-25, Safari 5.1-6 */
+      /* background: linear-gradient(to right, #2C5364, #203A43, #0F2027); */
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      /* slate-50 */
+    }
+
+    /* Style for the horizontal scrollbar to be subtle */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    /* Vertical text for "Faculty" */
+    .vertical-text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* Custom checkbox style */
+    .custom-checkbox:checked {
+      background-color: #2563eb;
+      /* blue-600 */
+      border-color: #2563eb;
+      /* blue-600 */
+    }
+
+    .custom-checkbox:checked::after {
+      content: '✓';
+      color: white;
+      display: block;
+      text-align: center;
+      line-height: 1.25rem;
+    }
+
+    /* Sticky header and first column for better scrolling on large tables */
+    th,
+    td {
+      white-space: nowrap;
+    }
+
+    .sticky-col {
+      position: -webkit-sticky;
+      position: sticky;
+      left: 0;
+      z-index: 10;
+    }
+
+    .sticky-header {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+  </style>
+</head>
+
+<body class="antialiased text-slate-700">
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- Header Title -->
+    <header class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">Faculty & Research Areas</h1>
+      <p class="mt-3 text-lg text-slate-500 max-w-2xl mx-auto">An overview of our distinguished faculty and their
+        diverse areas of research specialization.</p>
+    </header>
+
+    <main>
+      <!-- Areas of Research Section -->
+      <section class="mb-12">
+        <div class="relative">
+          <h2 class="text-center text-2xl font-semibold text-slate-800 mb-6">Explore Areas of Research</h2>
+          <!-- Horizontal Scroll Container -->
+          <div id="research-areas-container" class="flex items-center gap-4 py-4 overflow-x-auto no-scrollbar">
+            <!-- Research area cards will be dynamically inserted here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Faculty Research Grid Section -->
+      <section class="flex gap-4">
+        <!-- Vertical Faculty Label -->
+        <div class="hidden md:flex items-center justify-center">
+          <h3 class="vertical-text text-xl font-semibold text-slate-500 tracking-wider uppercase">Faculty</h3>
+        </div>
+
+        <!-- Main Table Container -->
+        <div class="w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-lg">
+          <table class="min-w-full divide-y divide-slate-200">
+            <thead id="table-header" class="bg-slate-50">
+              <!-- Table header row will be dynamically inserted here:)) -->
+            </thead>
+            <tbody id="table-body" class="divide-y divide-slate-200">
+              <!-- Table body rows will be dynamically inserted here:)) -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // --- Fake Data Stuff here:) ---
+      // In our real webpage, this would come from a database or API
+      const researchAreas = [
+        "Process Automation",
+        "Machine Learning",
+        "Artificial Intelligence",
+        "Data Science & Analytics",
+        "Cybersecurity",
+        "Computational Theory",
+        "Quantum Computing",
+        "Robotics",
+        "Biomedical Engineering",
+        "Sustainable Energy",
+        "Network Systems"
+      ];
+
+      const facultyData = [
+        { name: "Dr. Evelyn Reed", research: ["Machine Learning", "Artificial Intelligence", "Data Science & Analytics"] },
+        { name: "Prof. Samuel Chen", research: ["Cybersecurity", "Network Systems"] },
+        { name: "Dr. Isabella Rossi", research: ["Biomedical Engineering", "Robotics"] },
+        { name: "Prof. Kenji Tanaka", research: ["Quantum Computing", "Computational Theory"] },
+        { name: "Dr. Fatima Al-Jamil", research: ["Sustainable Energy", "Process Automation"] },
+        { name: "Prof. Marcus Thorne", research: ["Artificial Intelligence", "Robotics", "Machine Learning"] },
+        { name: "Dr. Chloe Bennett", research: ["Data Science & Analytics", "Cybersecurity"] },
+        { name: "Prof. Leo Martinez", research: ["Process Automation", "Sustainable Energy", "Network Systems"] },
+      ];
+
+      // --- DOM Element References ---
+      const researchContainer = document.getElementById('research-areas-container');
+      const tableHeader = document.getElementById('table-header');
+      const tableBody = document.getElementById('table-body');
+
+      // --- Render Functions ---
+
+      // Function to render the horizontal research area cards
+      function renderResearchAreas() {
+        researchContainer.innerHTML = ''; // Clear existing content
+        researchAreas.forEach((area, index) => {
+          const card = document.createElement('div');
+          card.className = `flex-shrink-0 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm border
+                        ${index === 0 ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-700 hover:bg-blue-50 hover:border-blue-300'}`;
+          card.textContent = area;
+          card.dataset.area = area;
+          researchContainer.appendChild(card);
+        });
+      }
+
+      // Function to render the main faculty/research table
+      function renderTable() {
+        // 1. Render Table Header
+        tableHeader.innerHTML = ''; // Clear
+        const headerRow = document.createElement('tr');
+        let headerHTML = `<th scope="col" class="sticky-col sticky-header bg-slate-50 px-6 py-4 text-left text-sm font-semibold text-slate-900 z-30">Professor Name</th>`;
+        researchAreas.forEach(area => {
+          headerHTML += `<th scope="col" class="sticky-header bg-slate-50 px-6 py-4 text-center text-sm font-semibold text-slate-900">${area}</th>`;
+        });
+        headerRow.innerHTML = headerHTML;
+        tableHeader.appendChild(headerRow);
+
+        // 2. Render Table Body
+        tableBody.innerHTML = ''; // Clear
+        facultyData.forEach(faculty => {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-50 transition-colors';
+
+          let rowHTML = `<td class="sticky-col bg-white hover:bg-slate-50 px-6 py-4 text-sm font-medium text-slate-800">${faculty.name}</td>`;
+
+          researchAreas.forEach(area => {
+            const hasResearch = faculty.research.includes(area);
+            rowHTML += `
+                            <td class="px-6 py-4 text-center">
+                                ${hasResearch ?
+                `<div class="w-6 h-6 mx-auto rounded-md bg-blue-600 flex items-center justify-center" title="${faculty.name} works in ${area}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>`
+                :
+                `<div class="w-6 h-6 mx-auto rounded-md bg-slate-200" title="No specialization in ${area}"></div>`
+              }
+                            </td>
+                        `;
+          });
+          row.innerHTML = rowHTML;
+          tableBody.appendChild(row);
+        });
+      }
+
+      // --- Event Listeners ---
+      researchContainer.addEventListener('click', function (e) {
+        if (e.target.dataset.area) {
+          // Remove active state from all cards
+          researchContainer.querySelectorAll('div').forEach(card => {
+            card.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
+            card.classList.add('bg-white', 'text-slate-700', 'hover:bg-blue-50', 'hover:border-blue-300');
+          });
+          // Add active state to clicked card
+          e.target.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
+          e.target.classList.remove('bg-white', 'text-slate-700', 'hover:bg-blue-50', 'hover:border-blue-300');
+
+          // Highlight the corresponding table column
+          const areaIndex = researchAreas.indexOf(e.target.dataset.area);
+
+          // Reset all column highlights
+          document.querySelectorAll('th, td').forEach(cell => cell.classList.remove('bg-blue-50'));
+
+          // Highlight new column
+          if (areaIndex !== -1) {
+            const colIndex = areaIndex + 1; // +1 because of the professor name column!!
+            document.querySelectorAll(`tr > *:nth-child(${colIndex + 1})`).forEach(cell => {
+              if (!cell.classList.contains('sticky-header')) { // Don't highlight the main header
+                cell.classList.add('bg-blue-50');
+              }
+            });
+          }
+        }
+      });
+
+      // --- Initial Render ---
+      renderResearchAreas();
+      renderTable();
+    });
+  </script>
+</body>
+
+</html>
