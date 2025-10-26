@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jump Right In Layout</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-color: #ffffff;
+            padding: 40px;
+            display: flex;
+            justify-content: center; /* Horizontally center the main container */
+            min-height: 100vh;
+        }
+
+        /* Main container for the whole section */
+        .jump-in-section {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* Styling for the main heading with a background pill */
+        .jump-in-section h2 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #710202; /* Matches your current heading background */
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 50px;
+            margin-bottom: 50px;
+        }
+
+        /* Container for the grid of action items */
+        .action-grid {
+            display: flex;
+            align-items: stretch; /* Ensure all items stretch to the same height */
+            gap: 0; /* REMOVED gap: 25px, as separators will handle spacing */
+            justify-content: flex-start;
+        }
+
+        /* Styling for each individual action card */
+        .action-card {
+            background-color: #f19898; /* Matches your current card background */
+            border-radius: 15px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #000000;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            width: 200px;
+            height: 200px; /* Kept fixed height */
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            margin: 0 12.5px; /* HALF of the desired gap, for spacing around separators */
+        }
+
+        /* Hover effect for the action cards */
+        .action-card:hover {
+            background-color: #9a3535; /* Matches your current hover background */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        /* Styling for the icon background circle */
+        .icon-circle {
+            background-color: #ffffff;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the icons themselves */
+        .icon-circle i {
+            font-size: 2.2rem;
+            color: #772519; /* Matches your current icon color */
+        }
+
+        /* NEW: Styling for the vertical separator lines */
+        .vertical-separator {
+            width: 2px; /* Thicker line */
+            background-color: #7b7272; /* Matches your heading background color */
+            margin: 0; /* Reset margin as spacing is handled by card margin */
+            align-self: center; /* Vertically center the separator within the flex container */
+            height: 260px; /* Adjust height to be slightly shorter than cards */
+            border-radius: 1px; /* Slightly rounded ends for the separator */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="jump-in-section">
+        <h2>Jump Right In</h2>
+
+        <div class="action-grid">
+            <a href="https://example.com/membership" target="_blank" rel="noopener noreferrer" class="action-card">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                Become a member
+            </a>
+
+            <div class="vertical-separator"></div> <a href="https://example.com/events" target="_blank" rel="noopener noreferrer" class="action-card">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+                See Upcoming Events
+            </a>
+
+            <div class="vertical-separator"></div> <a href="https://example.com/projects" target="_blank" rel="noopener noreferrer" class="action-card">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-flask"></i>
+                </div>
+                Explore Our Projects
+            </a>
+
+            <div class="vertical-separator"></div> <a href="https://example.com/careers" target="_blank" rel="noopener noreferrer" class="action-card">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                Access Career Resources
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
