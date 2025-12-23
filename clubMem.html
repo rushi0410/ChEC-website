@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Verticals</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #FFFFFF;
+            color: #2E2E2E;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header-title {
+            display: inline-block;
+            background-color: #DBDBD8;
+            color: #2E2E2E;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 32px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(46,46,46,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .header-title:hover::before {
+            left: 100%;
+        }
+        
+        .header-title:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(46,46,46,0.15);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .vertical-card {
+            background-color: #DBDBD8;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 8px 24px rgba(46,46,46,0.12);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(46,46,46,0.08);
+        }
+        
+        .vertical-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2E2E2E, transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .vertical-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 24px 48px rgba(46,46,46,0.2);
+            border-color: rgba(46,46,46,0.15);
+        }
+        
+        .vertical-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card-content {
+            display: flex;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .left-section {
+            flex: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .vertical-card:hover .left-section {
+            transform: translateX(-4px);
+        }
+        
+        .vertical-title {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .vertical-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .vertical-title:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .vertical-title:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .description {
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+        
+        .description ul {
+            list-style: none;
+            padding-left: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-card:hover .description ul {
+            transform: translateX(8px);
+        }
+        
+        .description li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 24px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-card:hover .description li {
+            opacity: 1;
+        }
+        
+        .description li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2E2E2E;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            transform: scale(0.8);
+        }
+        
+        .vertical-card:hover .description li::before {
+            transform: scale(1.2);
+            color: #7E0101;
+        }
+        
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 140px;
+            transition: transform 0.3s ease;
+        }
+        
+        .vertical-card:hover .right-section {
+            transform: translateY(-4px);
+        }
+        
+        .head-container {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .vertical-card:hover .head-container {
+            transform: scale(1.05);
+        }
+        
+        .head-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .head-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .vertical-card:hover .head-img::before {
+            left: 100%;
+        }
+        
+        .vertical-card:hover .head-img {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+        }
+        
+        .head-name {
+            background-color: #FFFFFF;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #2E2E2E;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .vertical-card:hover .head-name {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background-color: #F8F8F8;
+        }
+        
+        .team-section {
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        .team-title {
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .vertical-card:hover .team-title {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .coordinators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .vertical-card:hover .coordinators-grid {
+            transform: translateY(-4px);
+        }
+        
+        .coordinator {
+            text-align: center;
+            transition: transform 0.3s ease;
+            opacity: 0.9;
+        }
+        
+        .vertical-card:hover .coordinator {
+            opacity: 1;
+        }
+        
+        .vertical-card:hover .coordinator:nth-child(1) { transform: translateY(-8px) scale(1.05); }
+        .vertical-card:hover .coordinator:nth-child(2) { transform: translateY(-4px) scale(1.02); }
+        .vertical-card:hover .coordinator:nth-child(3) { transform: translateY(0px) scale(1.01); }
+        .vertical-card:hover .coordinator:nth-child(4) { transform: translateY(4px) scale(1.02); }
+        
+        .co-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .co-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .vertical-card:hover .co-img::before {
+            left: 100%;
+        }
+        
+        .vertical-card:hover .co-img {
+            transform: rotate(360deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+        
+        .co-name {
+            background-color: #FFFFFF;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2E2E2E;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .vertical-card:hover .co-name {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background-color: #F8F8F8;
+        }
+
+        /* Color assignments for each vertical */
+        .events .vertical-title { background-color: #7E0101; color: #FFFFFF; }
+        .events .head-img { background-color: #7E0101; }
+        .events .co-img { background-color: #6F0505; }
+        .events .team-title { background-color: #7E0101; }
+
+        .digital .vertical-title { background-color: #997C7B; color: #2E2E2E; }
+        .digital .head-img { background-color: #997C7B; }
+        .digital .co-img { background-color: #997C7B; }
+        .digital .team-title { background-color: #997C7B; }
+
+        .ideation .vertical-title { background-color: #C3B5A7; color: #2E2E2E; }
+        .ideation .head-img { background-color: #C3B5A7; }
+        .ideation .co-img { background-color: #C3B5A7; }
+        .ideation .team-title { background-color: #C3B5A7; }
+
+        .networking .vertical-title { background-color: #2D0C0C; color: #FFFFFF; }
+        .networking .head-img { background-color: #2D0C0C; }
+        .networking .co-img { background-color: #2D0C0C; }
+        .networking .team-title { background-color: #2D0C0C; }
+
+        @media (max-width: 900px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .card-content {
+                flex-direction: column;
+            }
+            
+            .right-section {
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            .head-container {
+                flex: 1;
+            }
+            
+            .vertical-card:hover {
+                transform: translateY(-4px) scale(1.01);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header-title {
+                font-size: 24px;
+                padding: 12px 24px;
+            }
+            
+            .vertical-card {
+                padding: 24px;
+            }
+            
+            .vertical-title {
+                font-size: 18px;
+                padding: 10px 20px;
+            }
+            
+            .head-img {
+                width: 100px;
+                height: 100px;
+                font-size: 28px;
+            }
+            
+            .co-img {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-title">Club Verticals</div>
+        </div>
+
+        <div class="cards-grid">
+
+            <!-- Events and Management -->
+            <div class="vertical-card events">
+                <div class="card-content">
+                    <div class="left-section">
+                        <div class="vertical-title">Events & Management</div>
+                        <div class="description">
+                            <ul>
+                                <li>Plan and execute all club events</li>
+                                <li>Manage budgets, timelines & logistics</li>
+                                <li>Coordinate with sponsors & participants</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <div class="head-container">
+                            <div class="head-img">HD</div>
+                            <div class="head-name">Head</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-section">
+                    <div class="team-title">Team</div>
+                    <div class="coordinators-grid">
+                        <div class="coordinator">
+                            <div class="co-img">C1</div>
+                            <div class="co-name">Co 1</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C2</div>
+                            <div class="co-name">Co 2</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C3</div>
+                            <div class="co-name">Co 3</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C4</div>
+                            <div class="co-name">Co 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital Media -->
+            <div class="vertical-card digital">
+                <div class="card-content">
+                    <div class="left-section">
+                        <div class="vertical-title">Digital Media</div>
+                        <div class="description">
+                            <ul>
+                                <li>Create graphics, videos & posts</li>
+                                <li>Manage social media accounts</li>
+                                <li>Handle club branding & promotion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <div class="head-container">
+                            <div class="head-img">HD</div>
+                            <div class="head-name">Head</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-section">
+                    <div class="team-title">Team</div>
+                    <div class="coordinators-grid">
+                        <div class="coordinator">
+                            <div class="co-img">C1</div>
+                            <div class="co-name">Co 1</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C2</div>
+                            <div class="co-name">Co 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ideation -->
+            <div class="vertical-card ideation">
+                <div class="card-content">
+                    <div class="left-section">
+                        <div class="vertical-title">Ideation</div>
+                        <div class="description">
+                            <ul>
+                                <li>Brainstorm new ideas & projects</li>
+                                <li>Conduct creative workshops</li>
+                                <li>Develop concepts for club initiatives</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <div class="head-container">
+                            <div class="head-img">HD</div>
+                            <div class="head-name">Head</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-section">
+                    <div class="team-title">Team</div>
+                    <div class="coordinators-grid">
+                        <div class="coordinator">
+                            <div class="co-img">C1</div>
+                            <div class="co-name">Co 1</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C2</div>
+                            <div class="co-name">Co 2</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C3</div>
+                            <div class="co-name">Co 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Networking -->
+            <div class="vertical-card networking">
+                <div class="card-content">
+                    <div class="left-section">
+                        <div class="vertical-title">Networking</div>
+                        <div class="description">
+                            <ul>
+                                <li>Build industry & alumni connections</li>
+                                <li>Organize meetups & guest sessions</li>
+                                <li>Facilitate professional opportunities</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <div class="head-container">
+                            <div class="head-img">HD</div>
+                            <div class="head-name">Head</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-section">
+                    <div class="team-title">Team</div>
+                    <div class="coordinators-grid">
+                        <div class="coordinator">
+                            <div class="co-img">C1</div>
+                            <div class="co-name">Co 1</div>
+                        </div>
+                        <div class="coordinator">
+                            <div class="co-img">C2</div>
+                            <div class="co-name">Co 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
