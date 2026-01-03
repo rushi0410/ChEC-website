@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="style_feedback.css">
+</head>
+<body>
+
+    <button id="openFormBtn" class="main-btn">Give Feedback here</button>
+
+    <div id="feedbackModal" class="modal">
+        
+        <div class="modal-content">
+    <div class="modal-header">
+        <h2>Help us grow!</h2>
+    </div>
+    
+    <form id="feedbackForm">
+        <input type="text" placeholder="Name" required>
+                <select required>
+                    <option value="" disabled selected>Category</option>
+                    <option value="general">General Feedback</option>
+                    <option value="event">Event Suggestion</option>
+                    <option value="technical">Technical Issue</option>
+                    <option value="others">Others</option>
+                </select>
+
+                <textarea placeholder="Message" rows="4" required></textarea>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="successToast" class="toast">
+        Thank you! Your feedback has been sent to the ChEC Team.
+    </div>
+
+    <script src="feedback_js.js"></script>
+</body>
+</html>
