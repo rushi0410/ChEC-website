@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #2E2E2E;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+        .section-title {
+            background-color: #7E0101;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            cursor: default;
+            font-weight: bold;
+        }
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .card {
+            background-color: #DB8D8D;
+            color: #2E2E2E;
+            width: 200px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .icon-circle {
+            background-color: #FFFFFF;
+            color: #7E0101;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+        a.card {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="section-title">Jump Right In</div>
+    <div class="cards">
+        <div class="card">
+            <div class="icon-circle"><i class="fas fa-user-plus"></i></div>
+            Become a member
+        </div>
+        <div class="card">
+            <div class="icon-circle"><i class="fas fa-calendar-alt"></i></div>
+            Upcoming Events
+        </div>
+        <div class="card">
+            <div class="icon-circle"><i class="fas fa-flask"></i></div>
+            Our Projects
+        </div>
+        <a href="resources.html" class="card">
+            <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
+            Career Resources
+        </a>
+    </div>
+</body>
+</html>

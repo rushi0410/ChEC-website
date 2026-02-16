@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Resource Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #C3B5A7;
+            color: #2E2E2E;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2D0C0C;
+        }
+        h2 {
+            color: #6F0505;
+            margin-top: 40px;
+        }
+        .sub {
+            color: #997C7B;
+            margin-bottom: 30px;
+        }
+        .resource-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .resource-card {
+            background-color: #FFFFFF;
+            width: 250px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .resource-icon {
+            font-size: 30px;
+            color: #7E0101;
+            margin-bottom: 10px;
+        }
+        .resource-title {
+            font-weight: bold;
+            color: #2D0C0C;
+        }
+        .resource-desc {
+            font-size: 14px;
+            color: #2E2E2E;
+            margin: 5px 0 10px;
+        }
+        .resource-btn {
+            background-color: #997C7B;
+            color: #FFFFFF;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .resource-btn:hover {
+            background-color: #6F0505;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Resource Hub</h1>
+    <p class="sub">Essential Resources for Chemical Engineering Students</p>
+    
+    <h2>Software & Technical Skills</h2>
+    <div class="resource-cards">
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-cogs"></i></div>
+            <div class="resource-title">MATLAB Tutorials</div>
+            <div class="resource-desc">Mastering numerical computation</div>
+            <a href="https://www.youtube.com/playlist?list=PLbovhQcaPucU_IVzY7IdYrKhP7DyKuxJO" class="resource-btn" target="_blank">Access Guide</a>
+        </div>
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-project-diagram"></i></div>
+            <div class="resource-title">SIMULINK Tutorials</div>
+            <div class="resource-desc">Process simulation & Modeling</div>
+            <a href="https://www.youtube.com/playlist?list=PLho7ncbqgQbuBkVQp-qp9RipTLtMfPA2c" class="resource-btn" target="_blank">Watch Tutorial</a>
+        </div>
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-industry"></i></div>
+            <div class="resource-title">ASPEN PLUS Tutorials</div>
+            <div class="resource-desc">Chemical process simulation</div>
+            <a href="https://www.youtube.com/playlist?list=PLbovhQcaPucUocDVENe-Twx32H3XEZ0l5" class="resource-btn" target="_blank">Explore Now</a>
+        </div>
+    </div>
+    
+    <h2>Career Readiness</h2>
+    <div class="resource-cards">
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="resource-title">Resume Building</div>
+            <div class="resource-desc">Templates & tips for engineers</div>
+            <a href="https://www.youtube.com/watch?v=_Q6uXw_AK0w" class="resource-btn" target="_blank">Download Templates</a>
+        </div>
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-handshake"></i></div>
+            <div class="resource-title">Interview Prep</div>
+            <div class="resource-desc">HR & technical questions</div>
+            <a href="https://www.youtube.com/watch?v=t2w7rbhjUQU" class="resource-btn" target="_blank">Start Practicing</a>
+        </div>
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="resource-title">Higher Studies</div>
+            <div class="resource-desc">University guides & application tips</div>
+            <a href="https://www.youtube.com/watch?v=BxOBlYm7pdU" class="resource-btn" target="_blank">Study More</a>
+        </div>
+    </div>
+    
+    <h2>Academic & Competitive Exams</h2>
+    <div class="resource-cards">
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="resource-title">GATE Preparation</div>
+            <div class="resource-desc">Study material & practice tests for graduate aptitude, etc.</div>
+            <a href="https://www.youtube.com/playlist?list=PL0-bArK_VU0aax1deG5xAaWkaAKgGA4Fp" class="resource-btn" target="_blank">Study Now</a>
+        </div>
+        <div class="resource-card">
+            <div class="resource-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="resource-title">Higher Studies</div>
+            <div class="resource-desc">University guides & application tips</div>
+            <a href="https://www.youtube.com/watch?v=BxOBlYm7pdU" class="resource-btn" target="_blank">Learn More</a>
+        </div>
+    </div>
+</body>
+</html>
