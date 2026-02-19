@@ -3,206 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Talent Directory | IIT Tirupati</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Our Projects - Faculty Portal</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        :root {
+            --primary-bg: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-main: #4a4a4a;
+            --accent-red: #890d09;
+            --header-red: #670b0b;
+            --border-color: #e0e0e0;
+        }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #e2e8f0;
-            background-image:
-                    radial-gradient(at 0% 0%, #f1f5f9 0, transparent 50%),
-                    radial-gradient(at 100% 100%, #cbd5e1 0, transparent 50%);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
         }
 
-        .student-card {
-            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 50%, #ffffff 100%);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 10px 10px 30px #d1d5db, -10px -10px 30px #ffffff;
-            transition: all 0.4s ease;
+        .header-pill {
+            background: var(--header-red);
+            color: white;
+            width: fit-content;
+            padding: 10px 40px;
+            border-radius: 50px;
+            margin: 0 auto 30px auto;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .student-card:hover {
-            transform: translateY(-10px);
-            background: linear-gradient(145deg, #eff6ff 0%, #f8fafc 100%);
-            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        #searchInput {
-            outline: none !important;
-            box-shadow: none !important;
+        /* Sidebar Styling */
+        .sidebar {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            height: fit-content;
         }
 
-        .search-container:focus-within {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        .sidebar h3 {
+            font-size: 0.9rem;
+            color: #000;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
-        .menu-wrapper {
-            position: relative;
-            padding-bottom: 25px;
-            margin-bottom: -25px;
+        .faculty-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .dropdown-panel {
-            visibility: hidden;
-            opacity: 0;
-            transform: translateY(10px);
+        .faculty-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
             transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
         }
 
-        .menu-wrapper:hover .dropdown-panel {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
+        .faculty-item:hover, .faculty-item.active {
+            background-color: #fff5f5;
+            color: var(--accent-red);
+            font-weight: bold;
         }
 
-        #copy-toast {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .faculty-item::after {
+            content: '›';
+            font-size: 1.2rem;
+            color: #ccc;
         }
 
-        #copy-toast.active {
-            opacity: 1;
-            transform: translate(-50%, -20px);
+        /* Project Grid Styling */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid transparent;
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #f1cbcb;
+        }
+
+        .project-image {
+            width: 100px;
+            height: 100px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .project-info h4 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0 0 12px 0;
+            line-height: 1.5;
+        }
+
+        .view-btn {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Modal / Popup Styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; /* Crucial: Start hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { order: -1; }
+            .project-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body class="p-8 md:p-20">
+<body>
 
-<header class="max-w-4xl mx-auto text-center mb-20">
-    <h1 class="text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Student Talent Directory</h1>
-    <p class="text-slate-500 text-lg">Connecting industry leaders with the next generation of Chemical Engineers.</p>
+    <div class="header-pill">Our Projects</div>
 
-    <div class="mt-10 max-w-lg mx-auto relative">
-        <div class="search-container bg-white/80 backdrop-blur-lg rounded-2xl flex items-center px-4 py-1 border border-white transition-all">
-            <i data-lucide="search" class="text-slate-400 w-5 h-5 ml-2"></i>
-            <input type="text" id="searchInput" placeholder="Search key area interests..."
-                   class="w-full bg-transparent border-none py-4 px-3 text-slate-700 font-medium">
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Faculties</h3>
+            <ul class="faculty-list" id="facultyList">
+                <li class="faculty-item active" onclick="filterProjects('all', this)">All Projects</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Anki Reddy Katha', this)">Prof. Anki Reddy Katha</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Arun Kumar Tangarila', this)">Prof. Arun Kumar Tangarila</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Sasidhar Gumma', this)">Prof. Sasidhar Gumma</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Anil Vir', this)">Dr. Anil Vir</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Shamik Misra', this)">Dr. Shamik Misra</li>
+            </ul>
+        </aside>
+
+        <main class="project-grid" id="projectGrid"></main>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody">
+                </div>
         </div>
     </div>
-</header>
 
-<main id="directoryGrid" class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-</main>
+    <script>
+        // Project Data
+        const projects = [
+            { 
+                id: 1,
+                title: "Advanced Distillation Control", 
+                faculty: "Prof. Anki Reddy Katha", 
+                desc: "Optimizing multi-component distillation columns using predictive modeling.",
+                details: "This research focuses on enhancing the efficiency of distillation processes by implementing advanced control strategies. We use real-time data to predict outcomes and adjust parameters automatically.",
+                icon: "🧪"
+            },
+            { 
+                id: 2,
+                title: "System Identification", 
+                faculty: "Prof. Arun Kumar Tangarila", 
+                desc: "Data-driven modeling for complex industrial processes.",
+                details: "We explore mathematical models derived from experimental data to describe the dynamic behavior of complex systems. This is vital for control and diagnostic purposes in chemical plants.",
+                icon: "📊"
+            },
+            { 
+                id: 3,
+                title: "Adsorption Science", 
+                faculty: "Prof. Sasidhar Gumma", 
+                desc: "Study of Metal Organic Frameworks (MOFs) for gas separation.",
+                details: "Our lab synthesizes new MOFs to tackle environmental challenges like carbon capture and hydrogen storage. This project involves both experimental work and molecular simulations.",
+                icon: "⚛️"
+            },
+            { 
+                id: 4,
+                title: "Reaction Engineering", 
+                faculty: "Dr. Anil Vir", 
+                desc: "Designing novel micro-reactors for high-temperature synthesis.",
+                details: "Micro-reactors offer superior heat and mass transfer. We are currently designing a reactor capable of handling extreme temperatures for sustainable chemical synthesis.",
+                icon: "⚗️"
+            },
+            { 
+                id: 5,
+                title: "Computational Fluid Dynamics", 
+                faculty: "Dr. Shamik Misra", 
+                desc: "Simulating turbulent flows in chemical processing units.",
+                details: "Using high-performance computing, we simulate complex fluid interactions to improve the design of mixing tanks and reactors, reducing energy waste and increasing yield.",
+                icon: "💻"
+            }
+        ];
 
-<div id="copy-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-2xl text-sm font-bold opacity-0 transition-all pointer-events-none shadow-2xl flex items-center gap-2 z-[100]">
-    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Copied
-</div>
+        // Function to render the project cards
+        function displayProjects(facultyName) {
+            const grid = document.getElementById('projectGrid');
+            grid.innerHTML = '';
 
-<script>
-    const students = [
-        {
-            id: "001",
-            name: "LIAM CHEN",
-            year: "2 Year MTech | Chemical Eng",
-            tags: ["Bioreaction Eng", "Pharmacology", "Bioinformatics"],
-            bio: "Seeking summer internships in biotech/pharma R&D. [cite: 17, 22]",
-            email: "abc123@gmail.com",
-            phone: "+91 9876543210"
-        },
-        {
-            id: "002",
-            name: "ANANYA RAO",
-            year: "Ph.D Scholar | Catalysis",
-            tags: ["Kinetics", "Nanomaterials", "Energy"],
-            bio: "Focusing on industrial catalysis and green hydrogen production research.",
-            email: "ananya.r@iittp.ac.in",
-            phone: "+91 8887776665"
+            const filtered = facultyName === 'all' 
+                ? projects 
+                : projects.filter(p => p.faculty === facultyName);
+
+            filtered.forEach(project => {
+                grid.innerHTML += `
+                    <div class="project-card">
+                        <div class="project-image">${project.icon}</div>
+                        <div class="project-info">
+                            <h4>${project.title}</h4>
+                            <p>${project.desc}</p>
+                            <div style="font-size:0.8rem; color:#888; margin-bottom:15px;">Lead: ${project.faculty}</div>
+                            <button class="view-btn" onclick="openModal(${project.id})">VIEW DETAILS</button>
+                        </div>
+                    </div>
+                `;
+            });
         }
-    ];
 
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            const toast = document.getElementById('copy-toast');
-            toast.classList.add('active');
-            setTimeout(() => toast.classList.remove('active'), 2000);
-        });
-    }
+        // Sidebar filter logic
+        function filterProjects(faculty, element) {
+            document.querySelectorAll('.faculty-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            displayProjects(faculty);
+        }
 
-    function render(data) {
-        const grid = document.getElementById('directoryGrid');
-        grid.innerHTML = data.map(s => `
-                <div class="student-card rounded-[3rem] p-10 flex flex-col h-full relative">
-
-                    <div class="absolute top-10 right-10 z-50">
-                        <div class="menu-wrapper">
-                            <button class="p-2 rounded-xl hover:bg-white text-slate-400 transition-colors">
-                                <i data-lucide="more-horizontal" class="w-6 h-6"></i>
-                            </button>
-                            <div class="dropdown-panel absolute right-0 top-full mt-2 w-48 bg-white shadow-2xl rounded-2xl py-2 border border-slate-100">
-                                <a href="Put the Google Form link here bro" target="_blank" class="block px-5 py-3 text-[10px] font-bold text-slate-600 hover:text-blue-600 uppercase tracking-widest">
-                                    Request Edit
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-8">
-                        <h2 class="text-2xl font-bold text-slate-900 tracking-tight leading-none mb-2 uppercase">${s.name}</h2>
-                        <p class="text-blue-600 text-[11px] font-black uppercase tracking-widest">${s.year}</p>
-                    </div>
-
-                    <div class="flex flex-wrap gap-2 mb-8">
-                        ${s.tags.map(tag => `<span class="bg-white/50 border border-slate-200 px-3 py-1.5 text-slate-500 text-[10px] font-bold rounded-xl uppercase tracking-tight">[${tag}]</span>`).join('')}
-                    </div>
-
-                    <p class="text-slate-600 text-sm leading-relaxed mb-12 flex-grow font-medium">
-                        ${s.bio}
-                    </p>
-
-                    <div class="pt-8 border-t border-slate-200">
-                        <div class="flex items-center justify-between mb-8 group relative">
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Contact Info</span>
-                            <div class="flex gap-2">
-                                <button class="p-3 bg-white hover:bg-blue-600 hover:text-white text-slate-400 rounded-2xl transition-all shadow-sm">
-                                    <i data-lucide="mail" class="w-4 h-4"></i>
-                                </button>
-                                <button class="p-3 bg-white hover:bg-blue-600 hover:text-white text-slate-400 rounded-2xl transition-all shadow-sm">
-                                    <i data-lucide="phone" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-
-                            <div class="hidden group-hover:block absolute bottom-full right-0 mb-4 w-64 bg-white p-6 rounded-3xl shadow-2xl text-[11px] border border-slate-50 z-[60]">
-                                <p class="text-slate-400 font-bold uppercase mb-4 text-[9px]">Direct Contact</p>
-
-                                <div class="flex justify-between items-center mb-3">
-                                    <span class="text-slate-800 font-semibold truncate mr-4">${s.email}</span>
-                                    <button onclick="copyToClipboard('${s.email}')" class="text-blue-600 font-bold hover:underline">Copy</button>
-                                </div>
-
-                                <div class="flex justify-between items-center">
-                                    <span class="text-slate-800 font-semibold">${s.phone}</span>
-                                    <button onclick="copyToClipboard('${s.phone}')" class="text-blue-600 font-bold hover:underline">Copy</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <a href="#" class="flex-1 bg-slate-900 text-white text-center py-4 text-[11px] font-bold rounded-2xl hover:bg-blue-700 transition-all tracking-widest uppercase shadow-lg shadow-slate-300">
-                                View Resume
-                            </a>
-                            <a href="#" class="p-4 bg-white border border-slate-100 rounded-2xl hover:text-blue-600 text-slate-400 shadow-sm transition-colors">
-                                <i data-lucide="linkedin" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
+        // POPUP LOGIC
+        function openModal(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <div style="font-size: 5rem; margin-bottom: 20px;">${project.icon}</div>
+                <h2 style="color: var(--accent-red); margin: 0 0 10px 0;">${project.title}</h2>
+                <h4 style="color: #666; margin-bottom: 20px;">Faculty Lead: ${project.faculty}</h4>
+                <div style="text-align: left; background: #f9f9f9; padding: 20px; border-radius: 10px; border-left: 5px solid var(--accent-red);">
+                    <p style="line-height: 1.6; color: #333; margin: 0;">${project.details}</p>
                 </div>
-            `).join('');
-        lucide.createIcons();
-    }
+                <button class="view-btn" style="margin-top: 30px; width: 100%;" onclick="closeModal()">Close</button>
+            `;
 
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const val = e.target.value.toLowerCase();
-        render(students.filter(s =>
-            s.name.toLowerCase().includes(val) ||
-            s.tags.some(t => t.toLowerCase().includes(val))
-        ));
-    });
+            document.getElementById('modalOverlay').style.display = 'flex';
+        }
 
-    render(students);
-</script>
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+
+        // Close when clicking outside or pressing Escape
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+        // Load all projects on startup
+        displayProjects('all');
+    </script>
 </body>
 </html>
