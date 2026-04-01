@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChEC | Student Talent Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --chec-maroon: #7E0101;
+            --chec-dark-maroon: #2D0C0C;
+            --chec-bg-light: #F8FAFC;
+            --chec-border: #DBD8D8;
+            --chec-text-dark: #2E2E2E;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--chec-bg-light);
+            color: var(--chec-text-dark);
+        }
+
+        .section-pill {
+            background-color: var(--chec-maroon);
+            color: white;
+            border-radius: 50px;
+            padding: 12px 28px;
+            display: inline-block;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(126, 1, 1, 0.2);
+        }
+
+        .student-card {
+            background: white;
+            border: 1.5px solid var(--chec-border);
+            border-radius: 2.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .student-card:hover {
+            border-color: var(--chec-maroon);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+        }
+
+        /* Fixed Image size logic */
+        .profile-img-container {
+            width: 130px;
+            height: 130px;
+            min-width: 130px; /* Prevents shrinking */
+            min-height: 130px; /* Prevents shrinking */
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--chec-maroon);
+            object-fit: cover;
+            background-color: #f1f5f9;
+        }
+
+        .tag-pill {
+            background-color: #f8fafc;
+            border: 1px solid var(--chec-border);
+            color: var(--chec-maroon);
+            font-weight: 700;
+            font-size: 0.65rem;
+        }
+
+        .detail-label {
+            color: var(--chec-maroon);
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        #copy-toast.active {
+            opacity: 1;
+            transform: translate(-50%, -10px);
+        }
+    </style>
+</head>
+<body class="p-6 md:p-16">
+
+<header class="max-w-6xl mx-auto mb-16 text-center"> <div class="section-pill mb-8 text-lg uppercase tracking-wider">
+        Student Talent Directory
+    </div>
+    
+    <div class="max-w-xl mx-auto"> <div class="bg-white flex items-center px-6 py-1 border border-[#DBD8D8] rounded-full focus-within:border-[#7E0101] shadow-sm">
+            <input type="text" id="searchInput" placeholder="Search by name, skills, or research expertise..."
+                   class="w-full bg-transparent border-none py-4 text-slate-600 focus:outline-none text-left">
+            <i data-lucide="search" class="text-slate-400 w-5 h-5"></i>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto space-y-20">
+    <section>
+        <h2 class="text-2xl font-bold mb-10 text-slate-800 flex items-center gap-3">
+            <span class="w-1.5 h-8 bg-[#7E0101] rounded-full"></span>
+            B.Tech / M.Tech / M.S. Students
+        </h2>
+        <div id="gradGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-10"></div>
+    </section>
+
+    <section>
+        <h2 class="text-2xl font-bold mb-10 text-slate-800 flex items-center gap-3">
+            <span class="w-1.5 h-8 bg-[#7E0101] rounded-full"></span>
+            PhD Scholars
+        </h2>
+        <div id="phdGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-10"></div>
+    </section>
+</main>
+
+<div id="copy-toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-[#2D0C0C] text-white px-8 py-4 rounded-2xl text-sm font-bold opacity-0 transition-all pointer-events-none shadow-2xl z-[100]">
+    Copied to clipboard
+</div>
+
+<script>
+    // Inlined talent directory data (fixes file:// CORS issue with ES modules)
+    const talentDirectory = {
+  "students": [
+    {
+      "name": "S Sridharshan",
+      "email": "ch23b035@iittp.ac.in",
+      "contact": "9566998264",
+      "linkedin": "https://www.linkedin.com/in/sridharshan29/",
+      "photo": "students_img/CH23B035 S SRIDHARSHAN.png",
+      "bio": "I am a chemical engineering student with a strong interest in battery modelling and experimental battery research.",
+      "resume": "students_resumes/CH23B035 S SRIDHARSHAN.pdf",
+      "program": "B.Tech Chemical Engineering, 3rd Year",
+      "project_title": "Thermal analysis of a 21700 lithium-ion battery cell using PyBaMM",
+      "supervisor": "Dr. Ranjith T",
+      "skills": ["MATLAB", "Simulink", "PyBaMM", "Python", "Physics-based modelling"],
+      "achievements": "• R&D Intern at Avkalan Labs (PINNs for battery modelling)<br>• Research Intern at Robbell Materials (Zn-ion batteries)<br>• 1st Place: Poster Presentation (Linde Ammonia Concept)<br>• 2nd Place: D'Solve It Simulink Hackathon"
+    },
+    {
+      "name": "Kevin Prashan",
+      "email": "ch23b019@iittp.ac.in",
+      "contact": "8122663608",
+      "linkedin": "https://www.linkedin.com/in/kevin-prashan-02824427b/",
+      "photo": "students_img/CH23B019 KEVIN PRASHAN.png",
+      "bio": "Interested in Chemical Reaction Engineering, Process Control, and the startup ecosystem.",
+      "resume": "students_resumes/CH23B019 KEVIN PRASHAN.pdf",
+      "program": "B.Tech Chemical Engineering, 3rd Year",
+      "project_title": "Stirrer speed setpoint tracking with PID tuning",
+      "supervisor": "Dr. Nabil M",
+      "skills": ["MATLAB", "Aspen Plus", "Autocad", "Python"],
+      "achievements": "• Won 1st in Process Control Simulink Hackathon<br>• Won 2nd in Poster Presentation on Ammonia Synthesis"
+    },
+    {
+      "name": "M Pramod",
+      "email": "ch23b022@iittp.ac.in",
+      "contact": "7200008955",
+      "linkedin": "https://www.linkedin.com/in/pramod-m-230714272",
+      "photo": "students_img/CH23B022 M PRAMOD.png",
+      "bio": "Interested in applied ML in chemical processes and computational analysis.",
+      "resume": "students_resumes/CH23B022 M PRAMOD.pdf",
+      "program": "B.Tech Chemical Engineering, 3rd Year",
+      "project_title": "SVM based Bioreactor Performance Analysis",
+      "supervisor": "Dr. Nabil Magbool Jan",
+      "skills": ["MATLAB", "Python", "Aspen Plus"],
+      "achievements": null
+    },
+    {
+      "name": "Pilla Sai Sathwik",
+      "email": "ch24b027@iittp.ac.in",
+      "contact": "9652013218",
+      "linkedin": "http://www.linkedin.com/in/sai-sathwik-pilla-22950a31b",
+      "photo": "students_img/CH24B027 PILLA SAI SATHWIK.png",
+      "bio": "Aspiring process innovator focusing on industrial decarbonization.",
+      "resume": null,
+      "program": "B.Tech Chemical Engineering, 2nd Year",
+      "project_title": "Optimization of industrial processes for lower carbon footprints",
+      "supervisor": null,
+      "skills": ["React.js", "TailwindCSS", "MATLAB", "Simulink"],
+      "achievements": null
+    },
+    {
+      "name": "Kushagra Agarwal",
+      "email": "ch22b020@iittp.ac.in",
+      "contact": "7505189235",
+      "linkedin": "www.linkedin.com/in/kushagra-agarwal-203aa2292",
+      "photo": "students_img/CH22B020 KUSHAGRA AGARWAL.png",
+      "bio": "Hands-on laboratory experience in battery materials, particularly sodium-ion cathode systems.",
+      "resume": "students_resumes/CH22B020 KUSHAGRA AGARWAL.pdf",
+      "program": "B-Tech Chemical Engineering, 4th Year",
+      "project_title": "Enhancing NVP cathode properties via metal doping (Ti, Cr, Mn, Fe)",
+      "supervisor": "Dr. Ranjith Thangavel",
+      "skills": ["MATLAB", "SIMULINK", "ASPEN PLUS", "ORIGIN"],
+      "achievements": "• Summer Internship at BIS Vijayawada"
+    },
+    {
+      "name": "Harish Aravinth KM",
+      "email": "ch23b014@iittp.ac.in",
+      "contact": "+91 9345990092",
+      "linkedin": "https://www.linkedin.com/in/harish-aravinth-k-m-4759392b0/",
+      "photo": "students_img/CH23B014 HARISH ARAVINTH K M.png",
+      "bio": "Strong interest in advanced drug delivery systems, biomaterials, and nanotechnology.",
+      "resume": "students_resumes/CH23B014 HARISH ARAVINTH K M.pdf",
+      "program": "B.Tech Chemical Engineering, 3rd Year",
+      "project_title": "Stimuli-responsive Targeted Drug Delivery & Nanoparticles",
+      "supervisor": "Dr. Uday Kumar S",
+      "skills": ["MATLAB", "Aspen Plus"],
+      "achievements": "• Process Engineer Intern at Crimsun Organics Pvt. Ltd."
+    },
+    {
+      "name": "Ninad Kelkar",
+      "email": "ch25m105@iittp.ac.in",
+      "contact": "9765921674",
+      "linkedin": "www.linkedin.com/in/ninad-kelkar-03923b233",
+      "photo": "students_img/CH25M105 Kelkar Ninad Rahul.png",
+      "bio": "Research interest in electrochemistry and ML-based process intensification.",
+      "resume": "students_resumes/CH25M105 Kelkar Ninad Rahul.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Electrode materials for Lithium-ion batteries",
+      "supervisor": "Dr. Bijoy Kumar Das",
+      "skills": ["MATLAB", "COMSOL"],
+      "achievements": "• Internship at Gharda Chemicals Ltd.<br>• Research Intern at ICT Mumbai (Oil spill remediation)"
+    },
+    {
+      "name": "REDDEM SESHA SAI",
+      "email": "ch25m108@iittp.ac.in",
+      "contact": "6302721336",
+      "linkedin": "http://linkedin.com/in/sesha-sai-sri-datta-reddem-681535251",
+      "photo": "students_img/CH25M108 Reddem Sesha Sai Sri Datta.png",
+      "bio": "Interested in sustainable energy, biofuels, and renewable fuel technologies.",
+      "resume": "students_resumes/CH25M108 Reddem Sesha Sai Sri Datta.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Production of Lignin from Biomass",
+      "supervisor": "Prof. Thamida Sunil Kumar",
+      "skills": ["MATLAB", "Comsol", "Python"],
+      "achievements": "• Internships at Universal Biofuels and Elite Natural Oils"
+    },
+    {
+      "name": "Venkata Sai Sri Vaishnavi",
+      "email": "ch25m109@iittp.ac.in",
+      "contact": "8217561319",
+      "linkedin": "www.linkedin.com/in/vaishnavi-tripurari",
+      "photo": "students_img/CH25M109 Venkata Sai Sri Vaishnavi T.png",
+      "bio": "Interests include biosensors, electrochemical systems, and energy storage.",
+      "resume": "students_resumes/CH25M109 Venkata Sai Sri Vaishnavi T.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Development of an enzymatic based biosensor",
+      "supervisor": "Dr. Payel Sen",
+      "skills": ["Python", "MATLAB", "C/R Programming", "Aspen"],
+      "achievements": "• Intern at G-KnowMe (DeepTech Startup)<br>• MSME & Food Network Intern"
+    },
+    {
+      "name": "K Sai Likhitha",
+      "email": "ch25m106@iittp.ac.in",
+      "contact": "8309599757",
+      "linkedin": "https://www.linkedin.com/in/sai-likhitha-kolavennu-539429238",
+      "photo": "students_img/CH25M106 Kolavennu Sai Likhitha.png",
+      "bio": "Strong interests in membrane technology, process modelling, and reaction engineering.",
+      "resume": "students_resumes/CH25M106 Kolavennu Sai Likhitha.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Membrane Technology and Process Modelling",
+      "supervisor": "Prof. Anki Reddy Katha",
+      "skills": ["MATLAB", "UNISIM", "COMSOL"],
+      "achievements": "• Summer Intern at ONGC Bokaro<br>• Final Year project at NIT AP"
+    },
+    {
+      "name": "Himanshu S Jambhulkar",
+      "email": "ch25m104@iittp.ac.in",
+      "contact": "8767981746",
+      "linkedin": "https://in.linkedin.com/in/himanshu-jambhulkar-35a9163b1",
+      "photo": "students_img/CH25M104 Jambhulkar Himanshu Shriram.png",
+      "bio": "Focusing on chemical and bioprocess technology, reaction engineering, and R&D.",
+      "resume": "students_resumes/CH25M104 Jambhulkar Himanshu Shriram.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Nanofiltration Technology and Process Modeling",
+      "supervisor": "Prof. Anki Reddy Katha",
+      "skills": ["MATLAB"],
+      "achievements": "• 3 months internship at Qualichem Laboratories, Nagpur"
+    },
+    {
+      "name": "Cherukuru Pravallika",
+      "email": "ch25m102@iittp.ac.in",
+      "contact": "7780676954",
+      "linkedin": "www.linkedin.com/in/cherukuru-pravallika-9382992a7",
+      "photo": "students_img/CH25M102 Cherukuru Pravallika.png",
+      "bio": "Passionate about reactor design, optimization, and sustainable processes.",
+      "resume": "students_resumes/CH25M102 Cherukuru Pravallika.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Machine Learning applications in Chemical Engineering",
+      "supervisor": "Prof. Arun Kumar Tangirala",
+      "skills": ["MATLAB", "COMSOL"],
+      "achievements": "• Project: Detection of adulteration in edible oils"
+    },
+    {
+      "name": "Prachi Arjun Meshram",
+      "email": "ch25m107@iittp.ac.in",
+      "contact": "9970432895",
+      "linkedin": "https://www.linkedin.com/in/prachi-meshram-4a71ba290?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      "photo": "students_img/CH25M107 Prachi Arjun Meshram.png",
+      "bio": "A chemical engineer with a background in biotechnology, focusing on biofuels, bioremediation, and sustainable process technologies.",
+      "resume": "students_resumes/CH25M107 Prachi Arjun Meshram.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Optimization of Algal Biorefinery",
+      "supervisor": "Dr. Shamik Mishra",
+      "skills": ["Bioprocess Engineering", "Biofuels"],
+      "achievements": null
+    },
+    {
+      "name": "Dagul S",
+      "email": "ch25m103@iittp.ac.in",
+      "contact": "7338921319",
+      "linkedin": "www.linkedin.com/in/dagul-sathya-5745",
+      "photo": "students_img/CH25M103 Dagul S.png",
+      "bio": "M.Tech student specializing in advanced battery technologies and power cell characterization.",
+      "resume": "students_resumes/CH25M103 Dagul S.pdf",
+      "program": "M.Tech Chemical Engineering, 1st Year",
+      "project_title": "Synthesis & Characterization of High-Performance Power Cells",
+      "supervisor": "Dr. Anil Babasaheb Vir",
+      "skills": ["Energy Storage", "Battery Characterization"],
+      "achievements": null
+    }
+  ],
+  "phd_scholars": [
+    {
+      "name": "Senjaliya Yash",
+      "email": "ch24d509@iittp.ac.in",
+      "contact": "6356671743",
+      "linkedin": "https://www.linkedin.com/in/senjaliya-yash-84aaa8208/",
+      "photo": "students_img/CH24D509 Senjaliya Yash Himatbhai.png",
+      "bio": "Working on Na-ion batteries for next-generation energy storage.",
+      "resume": null,
+      "research_topic": "Design & Optimization of High-Performance Na-Ion Cathodes",
+      "supervisor": "Dr. Brindha Moorthy",
+      "expertise_keywords": ["Na-ion battery", "Coin/Full cell"],
+      "achievements": null
+    },
+    {
+      "name": "Vivek Gupta",
+      "email": "ch21d504@iittp.ac.in",
+      "contact": "7989490699",
+      "linkedin": "https://www.linkedin.com/in/vivekguptaiitt",
+      "photo": "students_img/CH21D504 VIVEK GUPTA.png",
+      "bio": "Researching Food Engineering, Technology, and Bioprocessing.",
+      "resume": "students_resumes/CH21D504 VIVEK GUPTA.pdf",
+      "research_topic": "Downstream Processing of Betalains from Amaranthus",
+      "supervisor": "Prof. KSMS Raghavarao & Dr. Trivikram N",
+      "expertise_keywords": ["Food Engineering", "Bioprocessing"],
+      "achievements": "• Prime Minister's Research Fellow (PMRF)<br>• Best Post Graduate Award (Gold Medal)<br>• Springer Nature: Best Poster Award"
+    },
+    {
+      "name": "Manjay Kumar",
+      "email": "ch21d502@iittp.ac.in",
+      "contact": "8294224538",
+      "linkedin": "linkedin.com/in/manjay-kumar-a76673141",
+      "photo": "students_img/CH21D502 MANJAY KUMAR.png",
+      "bio": "Pursuing PhD focusing on optimal sensor network design.",
+      "resume": null,
+      "research_topic": "Optimal sensor network design for process systems",
+      "supervisor": "Dr. Nabil Magbool Jan",
+      "expertise_keywords": ["Process Monitoring", "Sensor Networks"],
+      "achievements": "• Publication: Robust optimal sensor selection<br>• Review: LPG Manufacturing & Refining"
+    },
+    {
+      "name": "Neha Kumari",
+      "email": "ch25d005@iittp.ac.in",
+      "contact": "9523874496",
+      "linkedin": "https://www.linkedin.com/in/neha-kumari-50411a366?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+      "photo": "students_img/CH25D005 Neha Kumari.png",
+      "bio": "Doctoral researcher working on granular physics simulations and intruder dynamics modeling using LAMMPS.",
+      "resume": null,
+      "research_topic": "Granular Physics & Particle-Scale Interaction Modeling",
+      "supervisor": "Dr. Anki Reddy Katha",
+      "expertise_keywords": ["Granular physics", "Intruder dynamics", "LAMMPS Simulation"],
+      "achievements": null
+    },
+    {
+      "name": "Nayuni Vandana",
+      "email": "ch22d501@iittp.ac.in",
+      "contact": "8328515068",
+      "linkedin": "https://www.linkedin.com/in/nayuni-vandana-7803a126b/",
+      "photo": "students_img/CH22D501 Nayuni Vandana.png",
+      "bio": "PhD scholar at the interface of membrane technology and food engineering.",
+      "resume": "students_resumes/CH22D501 Nayuni Vandana.pdf",
+      "research_topic": "Valorization of Whey and Cold Sterilization of Liquid Foods",
+      "supervisor": "Prof. Anki Reddy & Prof. KSMS Raghavarao",
+      "expertise_keywords": ["Membrane Processing", "Dairy Chemistry"],
+      "achievements": "• Best Poster Award (MDCS, IIT Bombay)<br>• Best E-Oral Presentation (USDN, Canada)"
+    },
+    {
+      "name": "Prathyusha T",
+      "email": "ch25d008@iittp.ac.in",
+      "contact": "8328107963",
+      "linkedin": "linkedin.com/in/prathyusha-t-3b0357220",
+      "photo": "students_img/CH25D008 T Prathyusha.png",
+      "bio": "Doctoral researcher interested in corrosion science and carbon capture.",
+      "resume": "students_resumes/CH25D008 T Prathyusha.pdf",
+      "research_topic": "Mitigating amine corrosion in CO2 capture systems",
+      "supervisor": "Prof. Sunil Kumar Thamida",
+      "expertise_keywords": ["Corrosion Engineering", "Carbon Capturing"],
+      "achievements": "• Indian Patent Granted (No: 433583-001)<br>• Best Paper Award (Sudhee 2023)"
+    },
+    {
+      "name": "Binita Devi",
+      "email": "ch25d512@iittp.ac.in",
+      "contact": "9915122650",
+      "linkedin": "linkedin.com/in/binita-yumlembam",
+      "photo": "students_img/CH25D512 Yumlembam Binita Devi.png",
+      "bio": "Focusing on extraction of bioactive compounds and valorization of agro-waste.",
+      "resume": "students_resumes/CH25D512 Yumlembam Binita Devi.pdf",
+      "research_topic": "Downstream Processing of Bioactive compounds",
+      "supervisor": "Dr. Narendra Singh & Prof. Raghavarao",
+      "expertise_keywords": ["Bioactive compounds", "Membrane Separation"],
+      "achievements": "• Published in Food Chemistry Advances<br>• 3rd Place: Poster Session on Waste Management (AFSTI)"
+    }
+  ]
+};
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById('copy-toast');
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 2000);
+        });
+    }
+
+    // Making this globally accessible for the onclick events
+    window.copyToClipboard = copyToClipboard;
+
+    function createCard(person, isPhd = false) {
+    const subtitle = isPhd ? "PhD Scholar" : person.program;
+    const mainWorkLabel = isPhd ? "Research Topic" : "Projects";
+    const mainWorkValue = isPhd ? person.research_topic : person.project_title;
+    const tags = isPhd ? (person.expertise_keywords || []) : (person.skills || []);
+    
+    // Check if supervisor exists and is valid
+    const hasSupervisor = person.supervisor && 
+                          person.supervisor !== null && 
+                          !['null', 'na', '', 'none'].includes(person.supervisor.toString().toLowerCase().trim());
+
+    // Clean check for achievements
+    const hasAchievements = person.achievements && 
+                            person.achievements !== null && 
+                            !['null', 'na', 'not yet.', ''].includes(person.achievements.toString().toLowerCase().trim());
+
+    // Clean check for resume
+    const hasResume = person.resume && 
+                      person.resume !== null && 
+                      person.resume.trim() !== "" && 
+                      person.resume !== "null";
+
+    return `
+        <div class="student-card p-8 md:p-10 relative">
+            <div class="absolute top-6 right-6 group/menu z-20 pb-4 pr-4"> 
+                <button class="text-slate-300 hover:text-[#7E0101] transition-colors p-2">
+                    <i data-lucide="more-horizontal" class="w-6 h-6"></i>
+                </button>
+                <div class="hidden group-hover/menu:block absolute right-4 top-[80%] bg-white shadow-xl border border-slate-100 rounded-xl py-2 w-40 z-50">
+                    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank" class="block px-5 py-3 text-[10px] font-bold text-slate-500 hover:bg-slate-50 hover:text-[#7E0101] uppercase tracking-widest">
+                        Request Edit
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8 items-center md:items-start mb-8">
+                <div class="profile-img-container">
+                    <img src="${person.photo}" alt="${person.name}" onerror="this.src='https://via.placeholder.com/150'" class="profile-img">
+                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-[#7E0101] leading-tight uppercase tracking-tight">${person.name}</h3>
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-[0.15em] mt-1">${subtitle}</p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-2 mt-4">
+                        ${tags.slice(0, 6).map(tag => `<span class="tag-pill px-2.5 py-1 rounded-md uppercase">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 flex-grow">
+                <div class="space-y-5">
+                    <div>
+                        <span class="detail-label">${mainWorkLabel}</span>
+                        <p class="text-sm text-slate-800 font-semibold leading-snug">${mainWorkValue || 'Project details pending'}</p>
+                    </div>
+                    
+                    ${hasSupervisor ? `
+                        <div>
+                            <span class="detail-label">Supervisor</span>
+                            <p class="text-xs text-slate-500 font-medium">${person.supervisor}</p>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="border-l border-slate-100 pl-0 md:pl-6">
+                    ${hasAchievements ? `
+                        <span class="detail-label">Achievements & Experience</span>
+                        <div class="text-[11px] text-slate-600 leading-relaxed font-medium">
+                            ${person.achievements.replace(/\n/g, '<br>')}
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-slate-100 flex items-center justify-between mt-auto">
+                <div class="flex gap-3">
+                    <div class="group/contact relative">
+                        <button class="p-3 rounded-xl bg-slate-50 text-slate-400 group-hover/contact:bg-[#7E0101] group-hover/contact:text-white transition-all shadow-sm">
+                            <i data-lucide="contact" class="w-5 h-5"></i>
+                        </button>
+                        
+                        <div class="hidden group-hover/contact:block absolute bottom-[85%] left-0 pb-6 w-72 z-[60]">
+                            <div class="bg-white p-6 rounded-2xl shadow-2xl border border-slate-100">
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mb-4 tracking-widest">Direct Contact</p>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center text-xs gap-4">
+                                        <span class="text-slate-800 font-semibold truncate">${person.email}</span>
+                                        <button onclick="window.copyToClipboard('${person.email}')" class="text-[#7E0101] font-bold hover:underline shrink-0">Copy</button>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="text-slate-800 font-semibold">${person.contact || person.phone || 'N/A'}</span>
+                                        <button onclick="window.copyToClipboard('${person.contact || person.phone}')" class="text-[#7E0101] font-bold hover:underline shrink-0">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="${person.linkedin}" target="_blank" class="p-3 rounded-xl bg-slate-50 text-slate-400 hover:bg-[#0077b5] hover:text-white transition-all shadow-sm">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                </div>
+
+                ${hasResume ? `
+                    <a href="${person.resume}" target="_blank" class="bg-[#7E0101] text-white px-10 py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#2D0C0C] transition-all shadow-md">
+                        Resume
+                    </a>
+                ` : ''}
+            </div>
+        </div>
+    `;
+}
+
+    function render(filter = "") {
+        const gradGrid = document.getElementById('gradGrid');
+        const phdGrid = document.getElementById('phdGrid');
+        
+        const filteredStudents = talentDirectory.students.filter(s => 
+            s.name.toLowerCase().includes(filter) || 
+            (s.skills && s.skills.some(sk => sk.toLowerCase().includes(filter))) ||
+            (s.program && s.program.toLowerCase().includes(filter))
+        );
+
+        const filteredPhds = talentDirectory.phd_scholars.filter(p => 
+            p.name.toLowerCase().includes(filter) || 
+            (p.expertise_keywords && p.expertise_keywords.some(ex => ex.toLowerCase().includes(filter)))
+        );
+
+        gradGrid.innerHTML = filteredStudents.map(s => createCard(s, false)).join('');
+        phdGrid.innerHTML = filteredPhds.map(p => createCard(p, true)).join('');
+        
+        lucide.createIcons();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        render(e.target.value.toLowerCase());
+    });
+
+    // Initial render
+    render();
+</script>
+</body>
+</html>
