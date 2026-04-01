@@ -1,0 +1,331 @@
+/* --- Base Styles & Uniform Typography --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --chec-maroon: #7E0101;
+    --chec-dark-maroon: #2D0C0C;
+    --chec-bg-light: #F8FAFC;
+    --chec-border: #DBD8D8;
+    --chec-text-dark: #2E2E2E;
+    --chec-platinum: #DBD8D8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--chec-bg-light);
+    color: var(--chec-text-dark);
+    line-height: 1.6;
+    /* Consistent "Chemical Haze" Background */
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(195, 181, 167, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(126, 1, 1, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+/* --- Uniform Header --- */
+.main-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--chec-maroon);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    max-width: 50rem;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+/* --- Research Area Cards (Clickable Pills) --- */
+.research-section {
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--chec-dark-maroon);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.section-hint {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.horizontal-scroll {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+    overflow-x: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.research-card {
+    flex-shrink: 0;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: white;
+    color: var(--chec-text-dark);
+    border: 1.5px solid var(--chec-border);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.research-card:hover {
+    border-color: var(--chec-maroon);
+    color: var(--chec-maroon);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px -3px rgba(126, 1, 1, 0.15);
+}
+
+.research-card.active {
+    background-color: var(--chec-maroon);
+    color: #FFFFFF;
+    border-color: var(--chec-maroon);
+    box-shadow: 0 10px 15px -3px rgba(126, 1, 1, 0.3);
+}
+
+/* --- Matrix Table Styling --- */
+.table-responsive-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 2rem;
+    border: 1.5px solid var(--chec-border);
+    background-color: white;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    position: relative;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.faculty-table {
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.faculty-table th {
+    background-color: white;
+    padding: 1.5rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--chec-dark-maroon);
+    border-bottom: 2px solid var(--chec-bg-light);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.faculty-table th:first-child {
+    text-align: left;
+    border-right: 2px solid var(--chec-bg-light);
+}
+
+.faculty-table td {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--chec-bg-light);
+}
+
+/* --- Stable Vertical Band (Professor Names) --- */
+.faculty-table td:first-child, 
+.faculty-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 40;
+    background-color: #FFFFFF;
+    border-right: 2px solid var(--chec-border);
+    box-shadow: 4px 0 8px -2px rgba(0,0,0,0.05);
+}
+
+.faculty-table th:first-child {
+    top: 0;
+    z-index: 50;
+    background-color: var(--chec-bg-light);
+}
+
+.faculty-table td:not(:first-child) {
+    z-index: 10;
+    position: relative;
+}
+
+.table-row:hover {
+    background-color: #fef2f2;
+}
+
+.faculty-name-cell {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--chec-maroon);
+    background-color: white !important;
+    border-right: 2px solid var(--chec-bg-light);
+}
+
+/* --- Clickable Column Headers --- */
+.faculty-table th.clickable-header {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.faculty-table th.clickable-header:hover {
+    background-color: rgba(126, 1, 1, 0.05);
+    color: var(--chec-maroon);
+}
+
+.faculty-table th.clickable-header::after {
+    content: '→';
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.faculty-table th.clickable-header:hover::after {
+    opacity: 1;
+}
+
+/* --- Light Rectangular Status Indicators --- */
+.status-cell {
+    text-align: center;
+    padding: 0.85rem !important;
+    vertical-align: middle;
+}
+
+.icon-check {
+    width: 2.2rem;
+    height: 1.1rem;
+    margin: 0 auto;
+    border-radius: 3px;
+    background-color: rgba(126, 1, 1, 0.15);
+    border: 1.5px solid var(--chec-maroon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-check:hover {
+    background-color: var(--chec-maroon);
+    transform: scale(1.1);
+}
+
+.svg-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--chec-maroon);
+    transition: color 0.2s ease;
+}
+
+.icon-check:hover .svg-icon {
+    color: #FFFFFF;
+}
+
+.icon-empty {
+    width: 2.2rem;
+    height: 1.1rem;
+    margin: 0 auto;
+    border-radius: 3px;
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+}
+
+/* Highlight for the Search Filter */
+.highlight-col {
+    background-color: rgba(126, 1, 1, 0.08) !important;
+    border-left: 1px solid rgba(126, 1, 1, 0.1);
+    border-right: 1px solid rgba(126, 1, 1, 0.1);
+}
+
+/* Scrollbar Styling */
+.horizontal-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+.horizontal-scroll::-webkit-scrollbar-track {
+    background: var(--chec-bg-light);
+}
+.horizontal-scroll::-webkit-scrollbar-thumb {
+    background: var(--chec-platinum);
+    border-radius: 10px;
+}
+
+.faculty-table td, 
+.faculty-table th {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faculty-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.faculty-link:hover {
+    color: #7e0101;
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    border-top: 2px solid var(--chec-border);
+    color: var(--chec-dark-maroon);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .horizontal-scroll {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+}

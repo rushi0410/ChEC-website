@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChEC | Research Area Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Back Navigation -->
+        <nav class="back-nav">
+            <a href="../matrix/index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Research Matrix</span>
+            </a>
+        </nav>
+
+        <header class="header">
+            <h1 id="area-title">Loading...</h1>
+            <p id="area-description">Please wait while we load the research area information.</p>
+        </header>
+
+        <div class="sections">
+            <div class="column" id="faculties-column">
+                <div class="column-header">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Faculties</span>
+                </div>
+                <div class="column-content" id="faculties-content">
+                    <!-- Faculty cards will be populated here -->
+                </div>
+            </div>
+
+            <div class="column" id="scholars-column">
+                <div class="column-header">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>PhD Scholars</span>
+                </div>
+                <div class="column-content" id="scholars-content">
+                    <!-- PhD Scholar cards will be populated here -->
+                </div>
+            </div>
+
+            <div class="column" id="students-column">
+                <div class="column-header">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </div>
+                <div class="column-content" id="students-content">
+                    <!-- Student cards will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2026 ChEC Club, IIT Tirupati | Connect &bull; Engage &bull; Catalyze</p>
+        </footer>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="../data.js"></script>
+    <script src="../talent_directory.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

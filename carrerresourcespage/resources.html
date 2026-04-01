@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChEC | Resource Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --c-black-bean: #2D0C0C;
+            --c-firebrick: #7E0101;
+            --c-auburn: #6F0505;
+            --c-platinum: #DBD8D8;
+            --c-white: #FFFFFF;
+            --c-text: #2E2E2E;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            color: var(--c-text);
+            /* Balanced "Chemical Haze" Effect */
+            background-color: #fdfbf9;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(195, 181, 167, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(126, 1, 1, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        /* --- High-End Header --- */
+        .header-box {
+            background: linear-gradient(135deg, var(--c-black-bean) 0%, var(--c-auburn) 100%);
+            padding: 60px;
+            border-radius: 2.5rem;
+            border-left: 12px solid var(--c-firebrick);
+            box-shadow: 0 20px 50px rgba(45, 12, 12, 0.2);
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-box h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            color: var(--c-white);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .header-box p {
+            font-size: 1.2rem;
+            color: var(--c-platinum);
+            margin-top: 15px;
+            font-weight: 500;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* --- Category Pill --- */
+        .category-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--c-black-bean);
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            border-bottom: 4px solid var(--c-firebrick);
+        }
+
+        /* --- Resource Grid --- */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 35px;
+            margin-bottom: 100px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid var(--c-platinum);
+            border-radius: 2rem; /* Uniform with directory */
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--c-firebrick);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        /* Rectangular Image/Icon Container */
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            background: #fef2f2;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            border: 1px solid rgba(126, 1, 1, 0.1);
+        }
+
+        .icon-box i {
+            font-size: 32px;
+            color: var(--c-firebrick);
+        }
+
+        .resource-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--c-black-bean);
+            margin: 0 0 12px 0;
+            text-transform: uppercase;
+        }
+
+        .resource-card p {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        /* Access Button */
+        .access-btn {
+            text-decoration: none;
+            background: var(--c-firebrick);
+            color: white;
+            padding: 16px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(126, 1, 1, 0.2);
+        }
+
+        .access-btn:hover {
+            background: var(--c-black-bean);
+            transform: scale(1.02);
+            box-shadow: 0 12px 25px rgba(45, 12, 12, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 80px 0;
+            border-top: 4px solid var(--c-firebrick);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--c-black-bean);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 40px 20px; }
+            .header-box { padding: 40px; }
+            .header-box h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header-box">
+            <h1>Resource Hub</h1>
+            <p>A curated vault of technical guides, software tutorials, and career assets for the modern Chemical Engineer.</p>
+        </header>
+
+        <div class="category-label">
+            <i class="fas fa-microchip"></i> Software & Technical Skills
+        </div>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-terminal"></i></div>
+                <h3>MATLAB Tutorials</h3>
+                <p>Master numerical computation, algorithm development, and data visualization essentials.</p>
+                <a href="https://www.youtube.com/playlist?list=PLbovhQcaPucU_IVzY7IdYrKhP7DyKuxJO" class="access-btn" target="_blank">Explore MATLAB</a>
+            </div>
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-wave-square"></i></div>
+                <h3>Simulink Logic</h3>
+                <p>Advanced process modeling and dynamic simulation for complex control systems.</p>
+                <a href="https://www.youtube.com/playlist?list=PLho7ncbqgQbuBkVQp-qp9RipTLtMfPA2c" class="access-btn" target="_blank">Watch Now</a>
+            </div>
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-industry"></i></div>
+                <h3>Aspen Plus Pro</h3>
+                <p>The industry standard for chemical process design, heat balance, and mass flow simulation.</p>
+                <a href="https://www.youtube.com/playlist?list=PLbovhQcaPucUocDVENe-Twx32H3XEZ0l5" class="access-btn" target="_blank">Explore Aspen</a>
+            </div>
+        </div>
+
+        <div class="category-label">
+            <i class="fas fa-user-tie"></i> Career Readiness
+        </div>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
+                <h3>build </h3>
+                <p>Professional engineering templates and formatting guides designed to pass ATS filters.</p>
+                <a href="https://www.youtube.com/watch?v=_Q6uXw_AK0w" class="access-btn" target="_blank">Build Resume</a>
+            </div>
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-comments"></i></div>
+                <h3>Interview Prep</h3>
+                <p>Technical and behavioral frameworks to help you ace core-sector placements.</p>
+                <a href="https://www.youtube.com/watch?v=t2w7rbhjUQU" class="access-btn" target="_blank">Start Training</a>
+            </div>
+        </div>
+
+        <div class="category-label">
+            <i class="fas fa-graduation-cap"></i> Academic Paths
+        </div>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-brain"></i></div>
+                <h3>GATE Prep</h3>
+                <p>Strategic study material and problem-solving sessions for the Graduate Aptitude Test.</p>
+                <a href="https://www.youtube.com/playlist?list=PL0-bArK_VU0aax1deG5xAaWkaAKgGA4Fp" class="access-btn" target="_blank">Begin Prep</a>
+            </div>
+            <div class="resource-card">
+                <div class="icon-box"><i class="fas fa-globe"></i></div>
+                <h3>Higher Studies</h3>
+                <p>Comprehensive university guides for Masters and PhD applications across global institutes.</p>
+                <a href="https://www.youtube.com/watch?v=BxOBlYm7pdU" class="access-btn" target="_blank">Study Abroad</a>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2026 ChEC Club, IIT Tirupati | Connect • Engage • Catalyze</p>
+        </footer>
+    </div>
+
+</body>
+</html>

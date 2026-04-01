@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - Faculty Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary-bg: #fdfbf9;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #2E2E2E;
+            --accent-red: #7E0101;
+            --header-red: #2D0C0C;
+            --border-color: #DBD8D8;
+            --radius: 1.25rem;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--primary-bg);
+            background-image:
+                radial-gradient(circle at 0% 0%, rgba(195, 181, 167, 0.35) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(126, 1, 1, 0.07) 0%, transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 36px 24px 60px;
+        }
+
+        /* ── Header ── */
+        .page-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .header-pill {
+            background: linear-gradient(135deg, var(--header-red) 0%, #6F0505 100%);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            padding: 14px 52px;
+            border-radius: 50px;
+            border-left: 7px solid var(--accent-red);
+            box-shadow: 0 10px 30px rgba(45, 12, 12, 0.25);
+        }
+
+        /* ── Layout ── */
+        .container {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            gap: 24px;
+            max-width: 1260px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 22px 18px;
+            position: sticky;
+            top: 24px;
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+
+        .sidebar h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--header-red);
+            margin-bottom: 14px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.82rem;
+            margin-bottom: 10px;
+            outline: none;
+            color: var(--text-main);
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+        .search-bar:focus { border-color: var(--accent-red); }
+
+        .faculty-list { list-style: none; }
+
+        .faculty-item {
+            padding: 11px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .faculty-item::after {
+            content: '›';
+            font-size: 1.1rem;
+            color: #ccc;
+            flex-shrink: 0;
+            margin-left: 6px;
+            transition: color 0.18s;
+        }
+
+        .faculty-item:hover {
+            background-color: #fef2f2;
+            color: var(--accent-red);
+        }
+        .faculty-item:hover::after { color: var(--accent-red); }
+
+        .faculty-item.active {
+            background-color: #fef2f2;
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+        .faculty-item.active::after { color: var(--accent-red); }
+
+        /* ── Project Grid ── */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+            align-content: start;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #bbb;
+            font-size: 0.95rem;
+            padding: 80px 20px;
+        }
+
+        /* ── Project Card ── */
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius);
+            border: 1.5px solid var(--border-color);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-red);
+            box-shadow: 0 12px 32px rgba(126, 1, 1, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .project-image {
+            background: #fef2f2;
+            border-radius: 12px;
+            border: 1px solid rgba(126, 1, 1, 0.08);
+            font-size: 2.2rem;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .project-info h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--header-red);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .faculty-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #fff;
+            background: var(--accent-red);
+            padding: 3px 11px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .co-tag {
+            font-size: 0.73rem;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            font-size: 0.83rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .view-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.18s, transform 0.15s;
+            align-self: flex-start;
+        }
+        .view-btn:hover {
+            background: var(--header-red);
+            transform: translateY(-1px);
+        }
+        .view-btn:active { transform: translateY(0); }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 5, 5, 0.65);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 1.75rem;
+            border-left: 8px solid var(--accent-red);
+            padding: 40px 36px 36px;
+            max-width: 560px;
+            width: 100%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.25s ease;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(22px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+
+        .modal-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 14px;
+            right: 20px;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: #bbb;
+            line-height: 1;
+            transition: color 0.15s;
+            background: none;
+            border: none;
+        }
+        .close-modal:hover { color: var(--accent-red); }
+
+        .modal-details-box {
+            text-align: left;
+            background: #faf8f8;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-red);
+            margin-top: 20px;
+        }
+
+        .modal-details-box p {
+            line-height: 1.75;
+            color: #333;
+            font-size: 0.93rem;
+        }
+
+        .modal-close-btn {
+            margin-top: 24px;
+            width: 100%;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 820px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar {
+                position: static;
+                max-height: 280px;
+                order: -1;
+            }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <div class="header-pill">Our Projects</div>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Faculties</h3>
+            <input type="text" class="search-bar" id="facultySearch" placeholder="Search faculty…" oninput="filterFacultyList(this.value)">
+            <ul class="faculty-list" id="facultyList">
+                <li class="faculty-item active" onclick="filterProjects('all', this)">All Projects</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Anki Reddy Katha', this)">Prof. Anki Reddy Katha</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Arun K. Tangirala', this)">Prof. Arun K. Tangirala</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Sasidhar Gumma', this)">Prof. Sasidhar Gumma</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. K S M S Raghavarao', this)">Prof. K S M S Raghavarao</li>
+                <li class="faculty-item" onclick="filterProjects('Prof. Thamida Sunil Kumar', this)">Prof. Thamida Sunil Kumar</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. M Nabil', this)">Dr. M Nabil</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Anil Vir', this)">Dr. Anil Vir</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Brindha Moorthy', this)">Dr. Brindha Moorthy</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Narendra Singh', this)">Dr. Narendra Singh</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Trivikram Nallamilli', this)">Dr. Trivikram Nallamilli</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Nilesh Choudhary', this)">Dr. Nilesh Choudhary</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. S Uday Kumar', this)">Dr. S Uday Kumar</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Ranjith Thangavel', this)">Dr. Ranjith Thangavel</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Shamik Misra', this)">Dr. Shamik Misra</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Payel Sen', this)">Dr. Payel Sen</li>
+                <li class="faculty-item" onclick="filterProjects('Dr. Bijoy Kumar Das', this)">Dr. Bijoy Kumar Das</li>
+            </ul>
+        </aside>
+
+        <main class="project-grid" id="projectGrid"></main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeModal()" aria-label="Close">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            { id: 1,  title: "Machine Learning in Process Engineering",  faculty: "Prof. Arun K. Tangirala",    coFaculty: "Dr. M Nabil",          desc: "Training algorithms to recognize patterns in process data, predict system behavior, and optimize chemical operations.",                                                              details: "Machine Learning in chemical engineering involves training algorithms to recognize patterns in process data, predict system behavior, and optimize operations without being explicitly programmed. It encompasses supervised, unsupervised, and reinforcement learning techniques applied to reactor modeling, fault detection, and process optimization.",                                                                                                                                                                                    icon: "🤖" },
+            { id: 2,  title: "Adsorption & Gas Separation",              faculty: "Prof. Sasidhar Gumma",       coFaculty: null,                    desc: "Study of how molecules adhere to solid surfaces, with applications in gas purification, carbon capture, and industrial separation.",                                                 details: "Adsorption research focuses on the phenomenon where molecules from a gas or liquid phase adhere to the surface of a solid material. It plays a critical role in separation processes, gas purification, carbon capture, and the design of industrial adsorbents for environmental and energy applications.",                                                                                                                                                                                                                              icon: "🧲" },
+            { id: 3,  title: "Photocatalysis for Clean Energy",          faculty: "Dr. Narendra Singh",         coFaculty: null,                    desc: "Accelerating chemical reactions using light and semiconductor catalysts for pollutant degradation and hydrogen generation.",                                                            details: "Photocatalysis investigates the acceleration of chemical reactions using light energy and a catalyst, typically a semiconductor material. Research covers degradation of pollutants, hydrogen generation from water splitting, and the development of novel photocatalytic materials for clean energy and environmental remediation.",                                                                                                                                                                                                       icon: "☀️" },
+            { id: 4,  title: "Process Systems Engineering",              faculty: "Prof. Arun K. Tangirala",    coFaculty: "Dr. Shamik Misra",      desc: "Mathematical modeling, simulation, and optimization of complex chemical and industrial processes using systems theory.",                                                              details: "Process Systems Engineering applies mathematical modeling, simulation, optimization, and control theory to the design and operation of complex chemical and industrial processes. It bridges fundamental science with practical engineering by integrating tools from systems theory, computing, and data analytics.",                                                                                                                                                                                                                     icon: "⚙️" },
+            { id: 5,  title: "Colloid & Interfacial Phenomena",          faculty: "Dr. Trivikram Nallamilli",   coFaculty: null,                    desc: "Studying behavior of matter at phase boundaries — emulsions, foams, suspensions, and surface forces.",                                                                                 details: "Colloid and Interfacial Phenomena studies the behavior of systems where matter exists at the boundary between two phases. This area underpins the science of emulsions, foams, suspensions, and surface forces, with applications in food, pharmaceuticals, and materials science.",                                                                                                                                                                                                                                                     icon: "🔬" },
+            { id: 6,  title: "Next-Generation Battery Research",         faculty: "Dr. Ranjith Thangavel",      coFaculty: "Dr. Brindha Moorthy",   desc: "Design, characterization, and modeling of lithium-ion, sodium-ion, and zinc-ion electrochemical energy storage systems.",                                                            details: "Battery research encompasses the design, characterization, and modeling of electrochemical energy storage systems including lithium-ion, sodium-ion, and zinc-ion batteries. Work spans electrode material synthesis, electrolyte development, cell architecture optimization, and physics-based computational modeling to improve energy density, cycle life, and safety.",                                                                                                                                                                    icon: "🔋" },
+            { id: 7,  title: "Battery Electrode Development",            faculty: "Dr. Bijoy Kumar Das",        coFaculty: null,                    desc: "Investigation and fabrication of advanced electrode materials for high-performance lithium-ion battery systems.",                                                                      details: "This project focuses on the development and characterization of novel electrode materials for lithium-ion batteries. Research covers synthesis routes, electrochemical testing, and optimization of material properties to achieve higher energy density, improved cycle stability, and enhanced rate performance.",                                                                                                                                                                                                                       icon: "⚡" },
+            { id: 8,  title: "Granular Physics & Bulk Solids",           faculty: "Prof. Anki Reddy Katha",     coFaculty: null,                    desc: "Mechanical and flow behavior of discrete solid particles — powders, grains, and granules — in industrial and natural systems.",                                                         details: "Granular Physics explores the mechanical and flow behavior of collections of discrete solid particles, such as powders, grains, and granules. Understanding granular dynamics is essential for bulk solids handling, pharmaceutical tablet manufacturing, food processing, and geophysical phenomena like avalanches.",                                                                                                                                                                                                                    icon: "🌾" },
+            { id: 9,  title: "NanoBiotechnology & Drug Delivery",        faculty: "Dr. S Uday Kumar",           coFaculty: null,                    desc: "Design and application of nanoscale materials for targeted drug delivery, biosensing, and tissue engineering scaffolds.",                                                              details: "Nanobiotechnology sits at the intersection of nanotechnology and biology, focusing on nanoscale materials and devices for biological and medical purposes. Research includes nanoparticle synthesis for targeted drug delivery, biosensing, tissue engineering scaffolds, and the study of nano-bio interactions at the cellular level.",                                                                                                                                                                                                  icon: "💉" },
+            { id: 10, title: "Renewable Energy & Sustainability",        faculty: "Dr. Shamik Misra",           coFaculty: null,                    desc: "Development and optimization of clean energy technologies including solar, biofuels, green hydrogen, and sustainable industrial processes.",                                               details: "Renewable Energy and Sustainability research addresses the development and optimization of clean energy technologies such as solar, wind, biofuels, and green hydrogen. It also encompasses life cycle assessment, carbon footprint reduction, circular economy principles, and engineering of sustainable industrial processes.",                                                                                                                                                                                                          icon: "🌱" },
+            { id: 11, title: "Artificial Intelligence for Engineering",  faculty: "Prof. Arun K. Tangirala",    coFaculty: null,                    desc: "Building intelligent systems for reasoning, learning, and decision-making in complex process environments using deep learning and neural networks.",                                   details: "Artificial Intelligence in engineering focuses on building intelligent systems capable of reasoning, learning, and decision-making in complex process environments. It includes deep learning, neural networks, natural language processing, and knowledge-based systems applied to process design, predictive maintenance, and autonomous plant operations.",                                                                                                                                                                              icon: "🧠" },
+            { id: 12, title: "Surface Engineering of Polymers & Metals", faculty: "Dr. Narendra Singh",         coFaculty: null,                    desc: "Modifying surface properties — wettability, adhesion, corrosion resistance — of polymers and metals for functional applications.",                                                      details: "Surface Engineering involves modifying surface properties of materials through chemical, physical, or biological treatments. Applications range from anti-fouling coatings and biomedical implants to functional films for electronics and packaging.",                                                                                                                                                                                                                                                                                   icon: "🔩" },
+            { id: 13, title: "Metal-Organic Frameworks (MOFs)",          faculty: "Prof. Sasidhar Gumma",       coFaculty: null,                    desc: "Synthesis and application of highly porous crystalline MOF materials for gas storage, selective adsorption, and catalysis.",                                                            details: "Metal-Organic Frameworks (MOFs) are highly porous crystalline materials composed of metal ions coordinated to organic ligands. Research covers synthesis, characterization, and application in gas storage, selective adsorption, drug delivery, catalysis, and sensing due to their high surface areas and tunable pore structures.",                                                                                                                                                                                                    icon: "⚛️" },
+            { id: 14, title: "Food Process Engineering",                 faculty: "Prof. K S M S Raghavarao",   coFaculty: "Dr. Trivikram Nallamilli", desc: "Design and optimization of food production, preservation, and quality enhancement processes using chemical engineering principles.",                                                details: "Food Process Engineering applies chemical engineering principles to the design and optimization of food production and preservation processes. It covers heat and mass transfer in food systems, membrane filtration, extraction of bioactive compounds, cold sterilization, and physicochemical characterization of food materials.",                                                                                                                                                                                                    icon: "🍃" },
+            { id: 15, title: "Microfluidics & Corrosion Simulation",    faculty: "Prof. Thamida Sunil Kumar",  coFaculty: "Dr. Anil Vir",          desc: "Combining microscale fluid control with computational modeling of material degradation in aggressive industrial environments.",                                                         details: "This project combines microscale fluid behavior with computational modeling of material degradation in aggressive environments. Microfluidics enables precise control of chemical reactions in miniaturized devices, while corrosion simulation helps predict and mitigate material failure in pipelines, reactors, and CO2 capture systems.",                                                                                                                                                                                              icon: "🌊" },
+            { id: 16, title: "Energy & Environmental Sciences",          faculty: "Prof. Anki Reddy Katha",     coFaculty: null,                    desc: "Developing cleaner energy systems and reducing environmental impact through carbon capture, effluent treatment, and waste valorization.",                                               details: "Energy and Environmental Sciences encompasses research aimed at developing cleaner energy systems and reducing the environmental impact of industrial processes. This includes carbon capture and storage, effluent treatment, waste valorization, thermodynamic analysis, and development of materials aligned with global sustainability goals.",                                                                                                                                                                                           icon: "🌍" },
+            { id: 17, title: "Soft Matter & Food Physics",               faculty: "Dr. Trivikram Nallamilli",   coFaculty: null,                    desc: "Physical behavior of gels, emulsions, foams, and biological tissues — including rheology, texture, and structural transformations in food.",                                            details: "Soft Matter and Food Physics investigates materials that are easily deformable by thermal fluctuations or mechanical stress — including gels, emulsions, foams, and biological tissues. In food contexts, it explores texture, rheology, stability, and structural transformations during processing, cooking, and digestion.",                                                                                                                                                                                                           icon: "🧫" },
+            { id: 18, title: "Molecular Simulation",                     faculty: "Dr. Nilesh Choudhary",       coFaculty: null,                    desc: "Computational molecular dynamics and Monte Carlo methods to model atomic-scale behavior, thermodynamic properties, and reaction mechanisms.",                                            details: "Molecular Simulation uses computational techniques such as molecular dynamics and Monte Carlo methods to model behavior of molecules at the atomic scale. It provides insight into thermodynamic properties, phase behavior, diffusion, adsorption, and reaction mechanisms that are difficult to observe experimentally.",                                                                                                                                                                                                                icon: "💻" },
+            { id: 19, title: "Biosensing & Electrochemical Detection",   faculty: "Dr. Payel Sen",              coFaculty: null,                    desc: "Development of analytical devices detecting biological and chemical analytes with high sensitivity for diagnostics and environmental monitoring.",                                       details: "Biosensing involves analytical devices that detect biological or chemical analytes with high sensitivity using a biological recognition element coupled to a transducer. Research spans electrochemical, optical, and piezoelectric biosensors for medical diagnostics, environmental monitoring, and food safety.",                                                                                                                                                                                                                      icon: "📡" },
+            { id: 20, title: "Data Science for Industrial Processes",    faculty: "Prof. Arun K. Tangirala",    coFaculty: null,                    desc: "Extracting meaningful insights from large process datasets using statistical analysis, signal processing, and dimensionality reduction techniques.",                                    details: "Data Science in chemical and process engineering involves extracting meaningful insights from large, complex datasets generated by industrial processes, experiments, and simulations. It integrates statistical analysis, signal processing, dimensionality reduction, and visualization to support process understanding, monitoring, and decision-making.",                                                                                                                                                                               icon: "📊" },
+            { id: 21, title: "Process Control & Automation",             faculty: "Dr. M Nabil",                coFaculty: null,                    desc: "Designing strategies to maintain chemical processes at desired conditions using PID, model predictive control, and data-driven methods.",                                              details: "Process Control focuses on designing and implementing strategies to maintain chemical and industrial processes at desired operating conditions despite disturbances and uncertainties. It covers classical PID control, advanced model predictive control, system identification, and integration of data-driven methods.",                                                                                                                                                                                                                   icon: "🎛️" },
+            { id: 22, title: "Biomaterials & Tissue Engineering",        faculty: "Dr. S Uday Kumar",           coFaculty: null,                    desc: "Design and synthesis of biocompatible materials — scaffolds, hydrogels, and nanostructures — for medical, therapeutic, and regenerative applications.",                              details: "Biomaterials research involves the design, synthesis, and characterization of materials intended to interact with biological systems. This includes polymeric scaffolds for tissue engineering, hydrogels for drug release, biocompatible coatings, and nanostructured materials that mimic the extracellular matrix.",                                                                                                                                                                                                                    icon: "🧬" },
+            { id: 23, title: "Microfluidics & Lab-on-Chip",              faculty: "Dr. Anil Vir",               coFaculty: null,                    desc: "Manipulating microliter-scale fluids through microscale channels for high-throughput diagnostics, chemical synthesis, and single-cell analysis.",                                    details: "Microfluidics is the science of manipulating small volumes of fluids through channels with micro-scale dimensions. It enables precise, high-throughput experimentation in a miniaturized format, with applications in lab-on-a-chip diagnostics, chemical synthesis, single-cell analysis, and point-of-care testing.",                                                                                                                                                                                                                    icon: "🔭" }
+        ];
+
+        function displayProjects(facultyName) {
+            const grid = document.getElementById('projectGrid');
+            grid.innerHTML = '';
+
+            const filtered = facultyName === 'all'
+                ? projects
+                : projects.filter(p => p.faculty === facultyName || p.coFaculty === facultyName);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-results">No projects found for this faculty.</div>';
+                return;
+            }
+
+            filtered.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-image">${project.icon}</div>
+                    <div class="project-info">
+                        <h4>${project.title}</h4>
+                        <span class="faculty-tag">${project.faculty}</span>
+                        ${project.coFaculty ? `<div class="co-tag">Co-lead: ${project.coFaculty}</div>` : ''}
+                        <p>${project.desc}</p>
+                        <button class="view-btn" onclick="openModal(${project.id})">View Details</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProjects(faculty, element) {
+            document.querySelectorAll('.faculty-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            displayProjects(faculty);
+        }
+
+        function filterFacultyList(query) {
+            document.querySelectorAll('.faculty-item').forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        function openModal(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            document.getElementById('modalBody').innerHTML = `
+                <div style="font-size:3.8rem; margin-bottom:16px; line-height:1;">${project.icon}</div>
+                <h2 style="color:var(--accent-red); font-size:1.15rem; margin-bottom:8px; line-height:1.4;">${project.title}</h2>
+                <p style="font-size:0.85rem; font-weight:600; color:#555; margin-bottom:${project.coFaculty ? '4px' : '0'};">Faculty Lead: ${project.faculty}</p>
+                ${project.coFaculty ? `<p style="font-size:0.8rem; color:#aaa;">Co-lead: ${project.coFaculty}</p>` : ''}
+                <div class="modal-details-box">
+                    <p>${project.details}</p>
+                </div>
+                <button class="view-btn modal-close-btn" onclick="closeModal()">Close</button>
+            `;
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        displayProjects('all');
+    </script>
+</body>
+</html>
