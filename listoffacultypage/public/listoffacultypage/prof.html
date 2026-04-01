@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor Profile | ChEC IIT Tirupati</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-maroon: #7E0101;
+            --deep-maroon: #2D0C0C;
+            --soft-rose: #fff8f8;
+            --border-rose: #f2e1e1;
+            --white: #ffffff;
+            --bg-light: #f9f9f9;
+            --text-gray: #4a5568;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        /* ---- PAGE WRAPPER ---- */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* ---- CARD ---- */
+        .prof-card {
+            width: 100%;
+            max-width: 960px;
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #eee;
+            margin-top: 2rem;
+        }
+
+        .top-accent-bar {
+            height: 6px;
+            background-color: var(--primary-maroon);
+        }
+
+        .card-body {
+            padding: 2.5rem 3rem 3rem;
+        }
+
+        /* ---- HEADER: photo + name ---- */
+        .prof-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-maroon);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .prof-name {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--deep-maroon);
+            line-height: 1.2;
+        }
+
+        .prof-designation {
+            color: var(--primary-maroon);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            margin-top: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        /* ---- SECTIONS ---- */
+        .content-area {
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Areas of Interest box */
+        .interest-box {
+            background: var(--soft-rose);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-maroon);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--deep-maroon);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-text {
+            color: var(--text-gray);
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        /* Bio & Expertise box */
+        .bio-box {
+            padding: 1.25rem 1.5rem;
+            border: 1px solid #e8e8e8;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Latest Publications */
+        .publications-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .pub-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--deep-maroon);
+            margin-bottom: 0.75rem;
+        }
+
+        .pub-list {
+            list-style: disc;
+            padding-left: 1.25rem;
+        }
+
+        .pub-list li {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+
+        /* ---- CONTACT SIDEBAR ---- */
+        .contact-sidebar {
+            width: 260px;
+            flex-shrink: 0;
+        }
+
+        .contact-box {
+            background-color: var(--soft-rose);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-rose);
+        }
+
+        .contact-title {
+            color: var(--primary-maroon);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .icon-circle {
+            width: 32px;
+            height: 32px;
+            background: var(--white);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* SVG icons */
+        .icon-circle svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--primary-maroon);
+        }
+
+        .contact-item a,
+        .contact-item span {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.85rem;
+            word-break: break-all;
+            transition: color 0.2s;
+        }
+
+        .contact-item a:hover { color: var(--primary-maroon); }
+
+        /* ---- BACK LINK ---- */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-maroon);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+        .back-link:hover { opacity: 0.7; }
+
+        /* ---- FADE IN ---- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---- NOT FOUND ---- */
+        .not-found {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .not-found h1 { font-size: 2rem; color: var(--primary-maroon); margin-bottom: 1rem; }
+        .not-found p { color: var(--text-gray); margin-bottom: 2rem; }
+        .not-found a {
+            color: var(--white);
+            background: var(--primary-maroon);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 768px) {
+            .card-body { padding: 1.5rem; }
+            .prof-header { flex-direction: column; text-align: center; gap: 1rem; }
+            .prof-name { font-size: 1.6rem; }
+            .content-area { flex-direction: column-reverse; }
+            .contact-sidebar { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <main class="prof-card" id="prof-card">
+            <!-- Populated by JS -->
+        </main>
+    </div>
+
+    <script>
+        /* ==================================================================
+           FACULTY DATA (inline so it works with file:// protocol)
+           ================================================================== */
+        var faculties = [
+          { id:"anki-reddy", name:"Prof. Anki Reddy Katha", designation:"Professor & Head of the Department", qualification:"Ph.D., Indian Institute of Science, Bangalore, India.", expertise:["Granular Physics","Energy and Environmental Sciences"], bio:"Prof. Anki Reddy Katha leads the Department of Chemical Engineering at IIT Tirupati. His research focuses on granular physics, energy and environmental sciences, with significant contributions to understanding particle dynamics in industrial systems.", publications:['"A. Vamsikrishna, Sonu Kumar and K. Anki Reddy, \'Granular particle-shape heterogeneous mixtures discharging through a silo\', Journal of Fluid Mechanics [2021]."','"K. Anki Reddy et al., \'Effect of particle shape on discharge rate in a silo\', Physical Review E [2020]."'], contact:{email:"anki.reddy@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=4CKTSowAAAAJ", imageUrl:"prof_asset/anki.jpg" },
+          { id:"arun-tangirala", name:"Prof. Arun K. Tangirala", designation:"Professor", qualification:"Ph.D., University of Alberta, Edmonton", expertise:["Process Systems Engineering","Data Science & Artificial Intelligence"], bio:"Prof. Arun K. Tangirala is a renowned researcher in process systems engineering, data science and AI. He has authored multiple textbooks and has extensive publications in system identification and statistical process monitoring.", publications:['"A. K. Tangirala, \'Principles of System Identification: Theory and Practice\', CRC Press."', '"Process identification and control using multivariate statistical techniques, AIChE Journal."'], contact:{email:"arunkt@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=i2s59iQAAAAJ&hl=en&oi=ao", imageUrl:"prof_asset/arun.png" },
+          { id:"sasidhar-gumma", name:"Prof. Sasidhar Gumma", designation:"Professor", qualification:"Ph.D., Cleveland State University.", expertise:["Metal organic frameworks","Adsorption"], bio:"Prof. Sasidhar Gumma specializes in metal organic frameworks and adsorption processes. His research has advanced the understanding of gas separation and storage using novel porous materials.", publications:['"S. Gumma et al., \'Adsorption equilibria of CO2 and CH4 on metal-organic frameworks\', Langmuir."', '"Study of gas adsorption in microporous materials using volumetric methods, Chemical Engineering Science."'], contact:{email:"s.gumma@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=csFhYF4AAAAJ&hl=en&oi=ao", imageUrl:"prof_asset/SG.jpg" },
+          { id:"sunil-kumar", name:"Prof. Thamida Sunil Kumar", designation:"Professor", qualification:"Ph.D., University of Notre Dame, USA.", expertise:["Microfluidics","Corrosion Simulation"], bio:"Prof. Sunil Kumar's expertise lies in microfluidics and corrosion simulation. His work bridges experimental and computational approaches to understand fluid behaviour at the microscale.", publications:['"T. Sunil Kumar, \'Simulation of pitting corrosion using boundary element methods\', Corrosion Science."','"Microfluidic devices for chemical reaction analysis, Lab on a Chip."'], contact:{email:"sunil76@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=j07xKRYAAAAJ&hl=en&oi=sra", imageUrl:"prof_asset/sunil.jpg" },
+          { id:"bijoy-kumar-das", name:"Dr. Bijoy Kumar Das", designation:"Associate Professor", qualification:"Ph.D., National University of Singapore (NUS), Singapore.", expertise:["Advanced Battery Materials and Chemistries","Battery Manufacturing and Scalability"], bio:"Dr. Bijoy Kumar Das works on advanced battery materials and next-generation energy storage technologies. His research spans lithium-ion, sodium-ion, and solid-state battery systems.", publications:['"B. K. Das et al., \'High-performance cathode materials for sodium-ion batteries\', Advanced Energy Materials."','"Scalable synthesis of electrode materials for lithium-ion batteries, ACS Applied Materials."'], contact:{email:"bijoy@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=bijoy", imageUrl:"prof_asset/bijoy.png" },
+          { id:"m-nabil", name:"Dr. M Nabil", designation:"Associate Professor", qualification:"Ph.D., IIT Madras, India.", expertise:["Machine Learning for Process Systems","Process Optimization & Control"], bio:"Dr. M Nabil applies machine learning techniques to chemical process systems. His research integrates data-driven approaches with traditional process engineering for optimization and control.", publications:['"M. Nabil, \'Machine learning-based soft sensors for process monitoring\', Computers & Chemical Engineering."','"Data-driven optimization of chemical processes using neural networks, Industrial & Engineering Chemistry Research."'], contact:{email:"nabil@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=S4aJEdQAAAAJ&view_op=list_works&sortby=pubdate", imageUrl:"prof_asset/Nabil.png" },
+          { id:"anil-vir", name:"Dr. Anil Vir", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology (IIT) Madras, India.", expertise:["Microfluidics","Multiphase flow and Reaction"], bio:"Dr. Anil Vir's research focuses on microfluidics and multiphase flow systems, exploring novel reactor designs for enhanced mixing and reaction efficiency.", publications:['"A. Vir et al., \'Droplet-based microfluidics for reaction engineering\', Chemical Engineering Journal."','"Multiphase flow in microchannels: experimental and computational study, Microfluidics and Nanofluidics."'], contact:{email:"anilvir@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=HK51kKYAAAAJ&hl=en&authuser=3", imageUrl:"prof_asset/anilvir.jpg" },
+          { id:"brindha-moorthy", name:"Dr. Brindha Moorthy", designation:"Assistant Professor", qualification:"Ph.D., KAIST, South Korea.", expertise:["Materials Science and Engineering","Functional Materials for Energy Storage Applications"], bio:"Dr. Brindha Moorthy researches functional materials for energy storage, with focus on synthesis and characterization of electrode materials for next-generation batteries and supercapacitors.", publications:['"B. Moorthy et al., \'Nanostructured electrode materials for supercapacitors\', Journal of Power Sources."','"Functional coatings for lithium-ion battery separators, ACS Applied Energy Materials."'], contact:{email:"brindha.m@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=zcooNUEAAAAJ&hl=en", imageUrl:"prof_asset/brindha.jpg" },
+          { id:"narendra-singh", name:"Dr. Narendra Singh", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology Kanpur, India.", expertise:["Photocatalysis","Surface engineering of polymer and metal surfaces"], bio:"Dr. Narendra Singh works on photocatalysis and surface engineering, developing novel photocatalytic systems for environmental remediation and energy conversion applications.", publications:['"N. Singh et al., \'Visible-light-driven photocatalysis using modified TiO2\', Applied Catalysis B: Environmental."','"Surface modification of polymers for enhanced wettability, Langmuir."'], contact:{email:"narendra@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=sz5gBpwAAAAJ", imageUrl:"prof_asset/narendra.jpg" },
+          { id:"nilesh-choudhary", name:"Dr. Nilesh Choudhary", designation:"Assistant Professor", qualification:"Ph.D., Academy of Scientific and Innovative Research (CSIR-NCL).", expertise:["Multi-scale molecular simulation for applied materials and complex systems"], bio:"Dr. Nilesh Choudhary uses multi-scale molecular simulations to study complex systems and design advanced materials, bridging atomistic and continuum approaches.", publications:['"N. Choudhary et al., \'Molecular dynamics simulations of gas transport in membranes\', Journal of Membrane Science."','"Multi-scale modeling of polymer nanocomposites, Macromolecules."'], contact:{email:"nilesh@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=1tPTOVUAAAAJ", imageUrl:"prof_asset/nilesh.jpeg" },
+          { id:"payel-sen", name:"Dr. Payel Sen", designation:"Assistant Professor", qualification:"Ph.D., University of Alberta, Canada.", expertise:["Electrochemical biosensing","Sensor system engineering"], bio:"Dr. Payel Sen specializes in electrochemical biosensing and sensor system engineering, developing point-of-care diagnostic devices and environmental monitoring sensors.", publications:['"P. Sen et al., \'Electrochemical biosensor for rapid pathogen detection\', Biosensors and Bioelectronics."','"Wearable sensor platforms for health monitoring, Analytical Chemistry."'], contact:{email:"psen@iittp.ac.in"}, googleScholar:"https://www.researchgate.net/profile/Payel-Sen-4", imageUrl:"prof_asset/payel.png" },
+          { id:"ranjith-thangavel", name:"Dr. Ranjith Thangavel", designation:"Assistant Professor", qualification:"Ph.D., Chonnam National University, South Korea.", expertise:["Li-ion batteries, Na-ion batteries and beyond","Catalysis for electrochemical energy conversion"], bio:"Dr. Ranjith Thangavel focuses on lithium-ion and sodium-ion batteries, as well as electrocatalysis for energy conversion, advancing next-generation energy storage solutions.", publications:['"R. Thangavel et al., \'High-rate sodium-ion battery anodes from carbon nanomaterials\', Advanced Energy Materials."','"Electrocatalytic oxygen evolution using transition metal oxides, ACS Catalysis."'], contact:{email:"ranjith.t@iittp.ac.in"}, googleScholar:"https://scholar.google.co.kr/citations?user=GhrcS7UAAAAJ&hl=en", imageUrl:"prof_asset/ranjith.png" },
+          { id:"shamik-misra", name:"Dr. Shamik Misra", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology, Bombay, India.", expertise:["Process systems engineering","Renewable energy, and sustainability"], bio:"Dr. Shamik Misra works on process systems engineering with a focus on renewable energy systems and sustainable process design for a greener future.", publications:['"S. Misra et al., \'Optimal design of renewable energy systems\', Energy."','"Sustainability assessment of chemical processes using life cycle analysis, Journal of Cleaner Production."'], contact:{email:"misra@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=T7wda1AAAAAJ", imageUrl:"prof_asset/misra.png" },
+          { id:"trivikram-nallamilli", name:"Dr. Trivikram Nallamilli", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology Madras, India.", expertise:["Colloid and interfacial Phenomena","Soft matter and Food physics"], bio:"Dr. Trivikram Nallamilli researches colloidal and interfacial phenomena, soft matter, and food physics, exploring the science of emulsions, foams, and complex food systems.", publications:['"T. Nallamilli et al., \'Stabilization of Pickering emulsions using nanoparticles\', Langmuir."','"Rheology of food-grade emulsions and gels, Food Hydrocolloids."'], contact:{email:"trivikram@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=xuaWOC0AAAAJ", imageUrl:"prof_asset/trivikram.jpg" },
+          { id:"s-uday-kumar", name:"Dr. S Uday Kumar", designation:"Assistant Professor", qualification:"Ph.D., IIT - Roorkee, Roorkee, India.", expertise:["Nanobiotechnology and Biomaterials"], bio:"Dr. S Uday Kumar specializes in nanobiotechnology and biomaterials, developing nanoscale materials for biomedical applications including drug delivery and tissue engineering.", publications:['"S. Uday Kumar et al., \'Nanoparticle-based drug delivery systems for cancer therapy\', ACS Nano."','"Biocompatible scaffolds for tissue regeneration, Biomaterials."'], contact:{email:"udaykumar@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=-J7H_x4AAAAJ", imageUrl:"prof_asset/uday.jpg" },
+          { id:"raghavarao", name:"Prof. K S M S Raghavarao", designation:"Visiting Professor", qualification:"Ph.D., Institute of Chemical Technology (UICT), Mumbai, India. Post Doc - NIST-Colorado", expertise:["Food Process Engineering","Separation Processes","Contemporary Indian Thought"], bio:"Prof. K S M S Raghavarao is a distinguished visiting professor with expertise in food process engineering and separation processes, bringing decades of academic and research experience.", publications:['"K.S.M.S. Raghavarao et al., \'Aqueous two-phase extraction for downstream processing\', Chemical Engineering Science."','"Membrane-based separation processes for food industry, Journal of Food Engineering."'], contact:{email:"raghava@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=XyKApXgAAAAJ&hl=en&oi=ao", imageUrl:"prof_asset/raghavarao.png" }
+        ];
+
+        /* ==================================================================
+           READ ID FROM HASH & POPULATE PAGE
+           ================================================================== */
+        var profId = window.location.hash.substring(1);
+        var prof = null;
+        for (var i = 0; i < faculties.length; i++) {
+            if (faculties[i].id === profId) { prof = faculties[i]; break; }
+        }
+
+        var card = document.getElementById('prof-card');
+
+        if (!prof) {
+            document.title = 'Professor Not Found | ChEC IIT Tirupati';
+            card.innerHTML =
+                '<div class="top-accent-bar"></div>' +
+                '<div class="not-found">' +
+                    '<h1>Professor Not Found</h1>' +
+                    '<p>We could not find a faculty member with the given ID.</p>' +
+                    '<a href="list.html">Back to Faculty Directory</a>' +
+                '</div>';
+        } else {
+            document.title = prof.name + ' | ChEC IIT Tirupati';
+
+            /* Build publications list */
+            var pubHTML = '';
+            if (prof.publications && prof.publications.length > 0) {
+                for (var p = 0; p < prof.publications.length; p++) {
+                    pubHTML += '<li>' + prof.publications[p] + '</li>';
+                }
+            }
+
+            /* Build expertise list */
+            var expHTML = '';
+            for (var e = 0; e < prof.expertise.length; e++) {
+                expHTML += prof.expertise[e];
+                if (e < prof.expertise.length - 1) expHTML += ', ';
+            }
+
+            card.innerHTML =
+                '<div class="top-accent-bar"></div>' +
+                '<div class="card-body">' +
+
+                    /* Back link */
+                    '<a href="list.html" class="back-link fade-in">' +
+                        '&#8592; Back to Faculty Directory' +
+                    '</a>' +
+
+                    /* Header: Photo + Name */
+                    '<div class="prof-header fade-in">' +
+                        '<img src="' + prof.imageUrl + '" alt="' + prof.name + '" class="profile-img">' +
+                        '<div>' +
+                            '<h1 class="prof-name">' + prof.name + '</h1>' +
+                            '<p class="prof-designation">' + prof.designation + ', Chemical Engineering Department</p>' +
+                        '</div>' +
+                    '</div>' +
+
+                    /* Content area: main + contact sidebar */
+                    '<div class="content-area">' +
+
+                        /* LEFT: Contact sidebar */
+                        '<div class="contact-sidebar">' +
+                            '<div class="contact-box fade-in">' +
+                                '<h3 class="contact-title">Contact Details</h3>' +
+                                '<ul class="contact-list">' +
+                                    '<li class="contact-item">' +
+                                        '<div class="icon-circle">' +
+                                            '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>' +
+                                        '</div>' +
+                                        '<a href="mailto:' + prof.contact.email + '">' + prof.contact.email + '</a>' +
+                                    '</li>' +
+                                    '<li class="contact-item">' +
+                                        '<div class="icon-circle">' +
+                                            '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>' +
+                                        '</div>' +
+                                        '<a href="' + prof.googleScholar + '" target="_blank">Google Scholar</a>' +
+                                    '</li>' +
+                                '</ul>' +
+                            '</div>' +
+                        '</div>' +
+
+                        /* RIGHT: Main content */
+                        '<div class="main-content">' +
+
+                            /* Areas of Interest */
+                            '<div class="interest-box fade-in">' +
+                                '<h2 class="section-title">Areas of Interest</h2>' +
+                                '<p class="section-text">' + expHTML + '</p>' +
+                            '</div>' +
+
+                            /* Bio & Expertise */
+                            '<div class="bio-box fade-in">' +
+                                '<h2 class="section-title">Bio &amp; Expertise</h2>' +
+                                '<p class="section-text">' + prof.bio + '</p>' +
+                            '</div>' +
+
+                            /* Latest Publications */
+                            '<div class="publications-section fade-in">' +
+                                '<h2 class="pub-title">Latest Publications</h2>' +
+                                '<ul class="pub-list">' + pubHTML + '</ul>' +
+                            '</div>' +
+
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        /* ==================================================================
+           FADE-IN ANIMATION
+           ================================================================== */
+        var fadeEls = document.querySelectorAll('.fade-in');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeEls.forEach(function(el) { observer.observe(el); });
+    </script>
+</body>
+</html>

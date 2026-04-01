@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Directory &mdash; ChEC IIT Tirupati</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-maroon: #7E0101;
+            --deep-maroon: #2D0C0C;
+            --soft-rose: #fff8f8;
+            --border-color: #e0e0e0;
+            --text-gray: #444;
+            --bg-light: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .faculty-header-pill {
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 12px 35px;
+            background: var(--primary-maroon);
+            color: #fff;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(126, 1, 1, 0.2);
+        }
+
+        .search-wrapper { margin-bottom: 50px; position: relative; }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        #search {
+            width: 100%;
+            padding: 15px 25px 15px 50px;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #search:focus {
+            border-color: var(--primary-maroon);
+            box-shadow: 0 0 10px rgba(126, 1, 1, 0.1);
+        }
+
+        .faculty-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .faculty-row {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .faculty-row.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .faculty-row:hover {
+            transform: translateX(12px);
+            border-color: var(--primary-maroon);
+            box-shadow: 0 12px 30px rgba(126, 1, 1, 0.1);
+        }
+
+        .image-container {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            margin-right: 40px;
+        }
+
+        .faculty-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--primary-maroon);
+            transition: transform 0.3s ease;
+        }
+
+        .faculty-row:hover .faculty-image { transform: scale(1.05); }
+
+        .details { flex: 1; }
+
+        .name {
+            margin: 0 0 8px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-maroon);
+        }
+
+        .designation {
+            margin: 0 0 15px;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .expertise-container { margin-bottom: 15px; }
+
+        .expertise-container strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--deep-maroon);
+            font-size: 0.95rem;
+        }
+
+        .expertise-list { list-style: none; padding-left: 0; }
+
+        .expertise-list li {
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 4px;
+        }
+
+        .expertise-list li::before {
+            content: "\2022";
+            color: var(--primary-maroon);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .contact-links span {
+            color: var(--primary-maroon);
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-pill {
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 12px 30px;
+            background: var(--primary-maroon);
+            color: #fff;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(126, 1, 1, 0.2);
+        }
+
+        .page-footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #999;
+            padding: 50px 0;
+            font-size: 1.1rem;
+            display: none;
+        }
+
+        @media (max-width: 850px) {
+            .faculty-row { flex-direction: column; text-align: center; }
+            .image-container { margin-right: 0; margin-bottom: 25px; }
+            .contact-links { justify-content: center; }
+            .designation { justify-content: center; }
+            .expertise-list li { padding-left: 0; }
+            .expertise-list li::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="faculty-header-pill">Our Department Faculties</div>
+        </header>
+
+        <div class="search-wrapper">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search" placeholder="Search by name or research expertise...">
+        </div>
+
+        <div class="faculty-list" id="faculty-list"></div>
+
+        <div id="visiting-section" style="display:none;">
+            <div class="section-pill">Visiting Faculty</div>
+            <div class="faculty-list" id="visiting-list"></div>
+        </div>
+
+        <p class="no-results" id="no-results">No faculty members found matching your search.</p>
+
+        <footer class="page-footer">
+            <p>&copy; 2026 ChEC Club, IIT Tirupati | Empowering Future Engineers</p>
+        </footer>
+    </div>
+
+    <script>
+        /* ============================================================
+           FACULTY DATA — embedded inline so it works with file:// protocol
+           ============================================================ */
+        var faculties = [
+          { id:"anki-reddy", name:"Prof. Anki Reddy Katha", designation:"Professor & Head of the Department", qualification:"Ph.D., Indian Institute of Science, Bangalore, India.", expertise:["Granular Physics","Energy and Environmental Sciences"], contact:{email:"anki.reddy@iittp.ac.in",phone:"08486672740"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=4CKTSowAAAAJ", imageUrl:"prof_asset/anki.jpg", category:"faculty" },
+          { id:"arun-tangirala", name:"Prof. Arun K. Tangirala", designation:"Professor", qualification:"Ph.D., University of Alberta, Edmonton", expertise:["Process Systems Engineering","Data Science & Artificial Intelligence"], contact:{email:"arunkt@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=i2s59iQAAAAJ&hl=en&oi=ao", imageUrl:"prof_asset/arun.png", category:"faculty" },
+          { id:"sasidhar-gumma", name:"Prof. Sasidhar Gumma", designation:"Professor", qualification:"Ph.D., Cleveland State University.", expertise:["Metal organic frameworks","Adsorption"], contact:{email:"s.gumma@iittp.ac.in",phone:"0877 250 3671"}, googleScholar:"https://scholar.google.com/citations?user=csFhYF4AAAAJ&hl=en&oi=ao", imageUrl:"prof_asset/SG.jpg", category:"faculty" },
+          { id:"sunil-kumar", name:"Prof. Thamida Sunil Kumar", designation:"Professor", qualification:"Ph.D., University of Notre Dame, USA.", expertise:["Microfluidics","Corrosion Simulation"], contact:{email:"sunil76@iittp.ac.in",phone:"9492079213"}, googleScholar:"https://scholar.google.com/citations?user=j07xKRYAAAAJ&hl=en&oi=sra", imageUrl:"prof_asset/sunil.jpg", category:"faculty" },
+          { id:"bijoy-kumar-das", name:"Dr. Bijoy Kumar Das", designation:"Associate Professor", qualification:"Ph.D., National University of Singapore (NUS), Singapore.", expertise:["Advanced Battery Materials and Chemistries","Battery Manufacturing and Scalability"], contact:{email:"bijoy@iittp.ac.in",phone:"7558183597"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=bijoy", imageUrl:"prof_asset/bijoy.png", category:"faculty" },
+          { id:"m-nabil", name:"Dr. M Nabil", designation:"Associate Professor", qualification:"Ph.D., IIT Madras, India.", expertise:["Machine Learning for Process Systems","Process Optimization & Control"], contact:{email:"nabil@iittp.ac.in",phone:"7558183597"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=S4aJEdQAAAAJ&view_op=list_works&sortby=pubdate", imageUrl:"prof_asset/Nabil.png", category:"faculty" },
+          { id:"anil-vir", name:"Dr. Anil Vir", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology (IIT) Madras, India.", expertise:["Microfluidics","Multiphase flow and Reaction"], contact:{email:"anilvir@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=HK51kKYAAAAJ&hl=en&authuser=3", imageUrl:"prof_asset/anilvir.jpg", category:"faculty" },
+          { id:"brindha-moorthy", name:"Dr. Brindha Moorthy", designation:"Assistant Professor", qualification:"Ph.D., KAIST, South Korea.", expertise:["Materials Science and Engineering","Functional Materials for Energy Storage Applications"], contact:{email:"brindha.m@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?user=zcooNUEAAAAJ&hl=en", imageUrl:"prof_asset/brindha.jpg", category:"faculty" },
+          { id:"narendra-singh", name:"Dr. Narendra Singh", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology Kanpur, India.", expertise:["Photocatalysis","Surface engineering of polymer and metal surfaces"], contact:{email:"narendra@iittp.ac.in",phone:"9936337743"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=sz5gBpwAAAAJ", imageUrl:"prof_asset/Narendra.jpg", category:"faculty" },
+          { id:"nilesh-choudhary", name:"Dr. Nilesh Choudhary", designation:"Assistant Professor", qualification:"Ph.D., Academy of Scientific and Innovative Research (CSIR-NCL).", expertise:["Multi-scale molecular simulation for applied materials and complex systems"], contact:{email:"nilesh@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=1tPTOVUAAAAJ", imageUrl:"prof_asset/nilesh.jpeg", category:"faculty" },
+          { id:"payel-sen", name:"Dr. Payel Sen", designation:"Assistant Professor", qualification:"Ph.D., University of Alberta, Canada.", expertise:["Electrochemical biosensing","Sensor system engineering"], contact:{email:"psen@iittp.ac.in"}, googleScholar:"https://www.researchgate.net/profile/Payel-Sen-4", imageUrl:"prof_asset/payel.png", category:"faculty" },
+          { id:"ranjith-thangavel", name:"Dr. Ranjith Thangavel", designation:"Assistant Professor", qualification:"Ph.D., Chonnam National University, South Korea.", expertise:["Li-ion batteries, Na-ion batteries and beyond","Catalysis for electrochemical energy conversion"], contact:{email:"ranjith.t@iittp.ac.in"}, googleScholar:"https://scholar.google.co.kr/citations?user=GhrcS7UAAAAJ&hl=en", imageUrl:"prof_asset/ranjith.png", category:"faculty" },
+          { id:"shamik-misra", name:"Dr. Shamik Misra", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology, Bombay, India.", expertise:["Process systems engineering","Renewable energy, and sustainability"], contact:{email:"misra@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=T7wda1AAAAAJ", imageUrl:"prof_asset/misra.png", category:"faculty" },
+          { id:"trivikram-nallamilli", name:"Dr. Trivikram Nallamilli", designation:"Assistant Professor", qualification:"Ph.D., Indian Institute of Technology Madras, India.", expertise:["Colloid and interfacial Phenomena","Soft matter and Food physics"], contact:{email:"trivikram@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=xuaWOC0AAAAJ", imageUrl:"prof_asset/trivikram.jpg", category:"faculty" },
+          { id:"s-uday-kumar", name:"Dr. S Uday Kumar", designation:"Assistant Professor", qualification:"Ph.D., IIT - Roorkee, Roorkee, India.", expertise:["Nanobiotechnology and Biomaterials"], contact:{email:"udaykumar@iittp.ac.in"}, googleScholar:"https://scholar.google.com/citations?hl=en&user=-J7H_x4AAAAJ", imageUrl:"prof_asset/uday.jpg", category:"faculty" },
+          { id:"raghavarao", name:"Prof. K S M S Raghavarao", designation:"Visiting Professor", qualification:"Ph.D., Institute of Chemical Technology (UICT), Mumbai, India. Post Doc - NIST-Colorado", expertise:["Food Process Engineering","Separation Processes","Contemporary Indian Thought"], contact:{email:"raghava@iittp.ac.in",phone:"9483540988"}, googleScholar:"https://scholar.google.com/citations?user=XyKApXgAAAAJ&hl=en&oi=ao", imageUrl:"prof_asset/raghavarao.png", category:"visiting" }
+        ];
+
+        /* ============================================================
+           RENDERING
+           ============================================================ */
+        var deptContainer = document.getElementById('faculty-list');
+        var visitingContainer = document.getElementById('visiting-list');
+        var visitingSection = document.getElementById('visiting-section');
+        var noResults = document.getElementById('no-results');
+
+        function createFacultyCard(fac) {
+            var row = document.createElement('a');
+            row.className = 'faculty-row';
+            row.id = 'faculty-' + fac.id;
+            row.href = 'prof.html#' + fac.id;
+
+            row.innerHTML =
+                '<div class="image-container">' +
+                    '<img src="' + fac.imageUrl + '" alt="Portrait of ' + fac.name + '" class="faculty-image">' +
+                '</div>' +
+                '<div class="details">' +
+                    '<h2 class="name">' + fac.name + '</h2>' +
+                    '<p class="designation"><i class="fas fa-user-tie"></i> ' + fac.designation + '</p>' +
+                    '<div class="expertise-container">' +
+                        '<strong>Research Expertise:</strong>' +
+                        '<ul class="expertise-list">' +
+                            fac.expertise.map(function(ex) { return '<li>' + ex + '</li>'; }).join('') +
+                        '</ul>' +
+                    '</div>' +
+                    '<div class="contact-links">' +
+                        '<span><i class="fas fa-envelope"></i> Email</span>' +
+                        '<span><i class="fas fa-graduation-cap"></i> Google Scholar</span>' +
+                    '</div>' +
+                '</div>';
+
+            return row;
+        }
+
+        function renderFaculties() {
+            var deptFaculty = faculties.filter(function(f) { return f.category === 'faculty'; });
+            var visitFaculty = faculties.filter(function(f) { return f.category === 'visiting'; });
+
+            deptFaculty.forEach(function(fac) { deptContainer.appendChild(createFacultyCard(fac)); });
+
+            if (visitFaculty.length > 0) {
+                visitingSection.style.display = 'block';
+                visitFaculty.forEach(function(fac) { visitingContainer.appendChild(createFacultyCard(fac)); });
+            }
+
+            initScrollAnimations();
+        }
+
+        function initScrollAnimations() {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.faculty-row').forEach(function(row) { observer.observe(row); });
+        }
+
+        document.getElementById('search').addEventListener('input', function(e) {
+            var term = e.target.value.toLowerCase();
+            var visibleCount = 0;
+
+            document.querySelectorAll('.faculty-row').forEach(function(row) {
+                var text = row.innerText.toLowerCase();
+                var match = text.indexOf(term) !== -1;
+                row.style.display = match ? 'flex' : 'none';
+                if (match) visibleCount++;
+            });
+
+            var visitingCards = visitingContainer.querySelectorAll('.faculty-row');
+            var anyVisitingVisible = Array.from(visitingCards).some(function(c) { return c.style.display !== 'none'; });
+            visitingSection.style.display = anyVisitingVisible ? 'block' : 'none';
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+
+        renderFaculties();
+    </script>
+</body>
+</html>
