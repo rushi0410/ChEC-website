@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ChEC IIT Tirupati</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-maroon: #7E0101;
+            --deep-maroon: #2D0C0C;
+            --soft-rose: #fff8f8;
+            --border-color: #e0e0e0;
+            --text-gray: #444;
+            --bg-light: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            position: relative;
+        }
+
+        /* --- Pill Header Style --- */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 12px 40px;
+            background: var(--primary-maroon);
+            color: #fff;
+            border-radius: 50px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(126, 1, 1, 0.2);
+        }
+
+        /* --- Brief Section with Brand Border --- */
+        .brief-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-left: 8px solid var(--primary-maroon);
+            text-align: center;
+        }
+
+        .brief-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-maroon);
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .brief-text {
+            font-size: 1.2rem;
+            color: var(--deep-maroon);
+            max-width: 900px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* --- Cards Section --- */
+        .combined-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .combined-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .combined-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-maroon);
+        }
+
+        .combined-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .combined-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--soft-rose);
+            color: var(--primary-maroon);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: inset 0 0 0 1px rgba(126, 1, 1, 0.1);
+        }
+
+        .combined-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--deep-maroon);
+        }
+
+        .combined-content {
+            flex: 1;
+            margin-bottom: 30px;
+        }
+
+        .combined-bullets {
+            list-style: none;
+        }
+
+        .combined-bullets li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+        }
+
+        .combined-bullets li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary-maroon);
+            font-weight: bold;
+        }
+
+        /* --- Team Member Info --- */
+        .card-team-member {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--soft-rose);
+            border-radius: 15px;
+            border: 1px solid rgba(126, 1, 1, 0.05);
+        }
+
+        .team-image-wrapper {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            background: var(--primary-maroon);
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #fff;
+        }
+
+        .team-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: #fff;
+            text-align: center;
+            background: #7e0101;
+        }
+        
+        /* Ensures images fill the circles correctly */
+        .team-image img, .cv-avatar-main img, .cv-avatar-sub img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .team-role {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-maroon);
+            font-weight: 800;
+        }
+
+        .team-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--deep-maroon);
+        }
+
+        /* --- Animation Classes --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .combined-section { grid-template-columns: 1fr; }
+            .brief-section { padding: 30px; }
+        }
+
+        /* --- Club Verticals Isolated Styles --- */
+        .cv-wrapper {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cv-header-pill {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        .cv-main-title {
+            display: inline-block;
+            background-color: #7E0101;
+            color: #ffffff;
+            padding: 12px 45px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(126, 1, 1, 0.2);
+        }
+
+        .cv-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 30px;
+        }
+
+        .cv-vertical-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cv-vertical-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .cv-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .cv-tag {
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 50px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .cv-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cv-list li {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .cv-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: 800;
+            transition: transform 0.3s ease;
+        }
+
+        .cv-vertical-card:hover .cv-list li::before {
+            transform: translateX(3px);
+        }
+
+        /* --- Specific Vertical Theming --- */
+        .cv-events { border-top: 5px solid #7E0101; }
+        .cv-events .cv-tag, .cv-events .cv-team-tag, .cv-events .cv-avatar-main { background: #7E0101; }
+        .cv-events .cv-avatar-sub { background: #a30202; }
+        .cv-events .cv-list li::before { color: #7E0101; }
+
+        .cv-digital { border-top: 5px solid #997C7B; }
+        .cv-digital .cv-tag, .cv-digital .cv-team-tag, .cv-digital .cv-avatar-main { background: #997C7B; color: #fff; }
+        .cv-digital .cv-avatar-sub { background: #b39a99; }
+        .cv-digital .cv-list li::before { color: #997C7B; }
+
+        .cv-ideation { border-top: 5px solid #C3B5A7; }
+        .cv-ideation .cv-tag, .cv-ideation .cv-team-tag, .cv-ideation .cv-avatar-main { background: #C3B5A7; color: #2E2E2E; }
+        .cv-ideation .cv-avatar-sub { background: #d1c7bc; }
+        .cv-ideation .cv-list li::before { color: #C3B5A7; }
+
+        .cv-networking { border-top: 5px solid #2D0C0C; }
+        .cv-networking .cv-tag, .cv-networking .cv-team-tag, .cv-networking .cv-avatar-main { background: #2D0C0C; }
+        .cv-networking .cv-avatar-sub { background: #4a1515; }
+        .cv-networking .cv-list li::before { color: #2D0C0C; }
+
+        /* --- Avatars & Team Section --- */
+        .cv-avatar-main {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .cv-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cv-name-label, .cv-name-sub {
+            display: block;
+            background: #f8f9fa;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 8px;
+            border: 1px solid #eee;
+        }
+
+        .cv-team-divider {
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+            margin-top: 10px;
+        }
+
+        .cv-team-tag {
+            font-size: 0.8rem;
+            color: #fff;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .cv-co-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cv-co-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 25px;
+        }
+
+        .cv-avatar-sub {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- Scroll Animation --- */
+        .cv-fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .cv-fade-up.cv-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .cv-cards-grid { grid-template-columns: 1fr; }
+            .cv-card-top { flex-direction: column; align-items: center; text-align: center; }
+            .cv-list li { padding-left: 0; }
+            .cv-list li::before { display: none; }
+        }
+
+        .simple-separator {
+            border: none;
+            height: 4px; 
+            background-color: #7e0101;
+            width: 0;
+            margin: 25px auto;
+            border-radius: 10px;
+        }
+
+        .simple-separator.active {
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: 85%; }
+        }
+
+        /* --- Feedback Form --- */
+        .fb-section-container {
+            display: flex;
+            justify-content: end;
+            margin: 20px;
+        }
+
+        .fb-trigger-btn {
+            background-color: #7E0101;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(126, 1, 1, 0.2);
+        }
+
+        .fb-modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .fb-modal-content {
+            background-color: #ffffff;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden; 
+            animation: fb-modal-slide 0.4s ease-out;
+        }
+
+        @keyframes fb-modal-slide {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .fb-modal-header {
+            background-color: #7E0101; 
+            padding: 30px;
+            color: white;
+        }
+
+        .fb-form-body {
+            padding: 25px 30px 35px 30px;
+        }
+
+        .fb-input, .fb-select, .fb-textarea {
+            width: 100%;
+            padding: 12px 18px;
+            margin: 8px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            background-color: #fdfdfd;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .fb-submit-btn {
+            background-color: #7E0101;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .fb-toast {
+            visibility: hidden;
+            min-width: 280px;
+            background-color: #2D0C0C;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px 25px;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 30px;
+            z-index: 10000;
+        }
+
+        .fb-toast.show { 
+            visibility: visible; 
+            animation: fb-fadein 0.5s, fb-fadeout 0.5s 2.5s; 
+        }
+
+        /* --- Year Switcher --- */
+        .year-switcher-wrapper {
+            text-align: center;
+            margin: 20px auto 0 auto;
+            padding: 0 24px;
+        }
+
+        .year-switcher-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-maroon);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 14px;
+        }
+
+        .year-switcher-tabs {
+            display: inline-flex;
+            background: #fff;
+            border: 2px solid var(--primary-maroon);
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(126,1,1,0.12);
+        }
+
+        .year-tab {
+            padding: 12px 36px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: var(--primary-maroon);
+            transition: all 0.3s ease;
+        }
+
+        .year-tab.active {
+            background: var(--primary-maroon);
+            color: #fff;
+        }
+
+
+
+
+        /* --- New vertical themes for mentors and webdev --- */
+        .cv-mentors { border-top: 5px solid #2e2e2e; }
+        .cv-mentors .cv-tag, .cv-mentors .cv-team-tag, .cv-mentors .cv-avatar-main { background: #2e2e2e; }
+        .cv-mentors .cv-avatar-sub { background: #2e2e2e; }
+        .cv-mentors .cv-list li::before { color: #2e2e2e; }
+
+        .cv-webdev { border-top: 5px solid #6f0505; }
+        .cv-webdev .cv-tag, .cv-webdev .cv-team-tag, .cv-webdev .cv-avatar-main { background: #6f0505; }
+        .cv-webdev .cv-avatar-sub { background: #6f0505; }
+        .cv-webdev .cv-list li::before { color: #6f0505; }
+
+        /* --- Founders Section --- */
+        .founders-section {
+            max-width: 1200px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+        }
+
+        .founders-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .founder-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--primary-maroon);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            min-width: 220px;
+            transition: transform 0.3s ease;
+        }
+
+        .founder-card:hover { transform: translateY(-8px); }
+
+        .founder-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--primary-maroon);
+            overflow: hidden;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(126,1,1,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: #fff;
+        }
+
+        .founder-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .founder-badge {
+            background: var(--primary-maroon);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 18px;
+            border-radius: 50px;
+        }
+
+        .founder-name {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--deep-maroon);
+            text-align: center;
+        }
+
+        .founder-dept {
+            font-size: 0.85rem;
+            color: #777;
+            text-align: center;
+        }
+
+        /* --- Team year panels --- */
+        .team-year-panel { display: none; }
+        .team-year-panel.active { display: block; }
+
+        /* --- 2024-25 specific vertical themes (matching original poster palette) --- */
+        .cv-networking24 { border-top: 5px solid #2D0C0C; }
+        .cv-networking24 .cv-tag, .cv-networking24 .cv-team-tag, .cv-networking24 .cv-avatar-main { background: #2D0C0C; }
+        .cv-networking24 .cv-avatar-sub { background: #4a1515; }
+        .cv-networking24 .cv-list li::before { color: #2D0C0C; }
+
+        .cv-digital24 { border-top: 5px solid #997C7B; }
+        .cv-digital24 .cv-tag, .cv-digital24 .cv-team-tag, .cv-digital24 .cv-avatar-main { background: #997C7B; }
+        .cv-digital24 .cv-avatar-sub { background: #b39a99; }
+        .cv-digital24 .cv-list li::before { color: #997C7B; }
+
+        .cv-events24 { border-top: 5px solid #7E0101; }
+        .cv-events24 .cv-tag, .cv-events24 .cv-team-tag, .cv-events24 .cv-avatar-main { background: #7E0101; }
+        .cv-events24 .cv-avatar-sub { background: #a30202; }
+        .cv-events24 .cv-list li::before { color: #7E0101; }
+
+        .cv-ideation24 { border-top: 5px solid #C3B5A7; }
+        .cv-ideation24 .cv-tag, .cv-ideation24 .cv-team-tag, .cv-ideation24 .cv-avatar-main { background: #C3B5A7; color: #2E2E2E; }
+        .cv-ideation24 .cv-avatar-sub { background: #d1c7bc; }
+        .cv-ideation24 .cv-list li::before { color: #C3B5A7; }
+
+        .cv-mentorship24 { border-top: 5px solid #2e2e2e; }
+        .cv-mentorship24 .cv-tag, .cv-mentorship24 .cv-team-tag, .cv-mentorship24 .cv-avatar-main { background: #2e2e2e; }
+        .cv-mentorship24 .cv-avatar-sub { background: #2e2e2e; }
+        .cv-mentorship24 .cv-list li::before { color: #2e2e2e; }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="header-title">About Our Club</h1>
+        </header>
+
+        <section class="brief-section fade-up">
+            <div class="brief-label">Our Identity</div>
+            <p class="brief-text">
+                We are a vibrant community of passionate students at IIT Tirupati dedicated to fostering innovation, collaboration, and excellence in Chemical Engineering and beyond.
+            </p>
+        </section>
+
+        <div class="combined-section">
+            <article class="combined-card fade-up">
+                <div class="combined-header">
+                    <div class="combined-icon">🎯</div>
+                    <h2 class="combined-title">Our Vision</h2>
+                </div>
+                <div class="combined-content">
+                    <ul class="combined-bullets">
+                        <li>Empower students through hands-on learning projects</li>
+                        <li>Create an inclusive environment for diverse perspectives</li>
+                        <li>Build a legacy of excellence for future generations</li>
+                        <li>Bridge the gap between faculty and industry professionals</li>
+                    </ul>
+                </div>
+                <div class="card-team-member">
+                    <div class="team-image-wrapper">
+                        <div class="team-image"><img src="../assets/anilvir.jpg" alt="Dr. Anil Vir"></div>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-role">Faculty Advisor</div>
+                        <h3 class="team-name">Dr. Anil Vir</h3>
+                    </div>
+                </div>
+            </article>
+
+            <article class="combined-card fade-up">
+                <div class="combined-header">
+                    <div class="combined-icon">🚀</div>
+                    <h2 class="combined-title">Our Aim</h2>
+                </div>
+                <div class="combined-content">
+                    <ul class="combined-bullets">
+                        <li>Organize seminars to enhance practical technical skills</li>
+                        <li>Provide peer-to-peer mentorship for knowledge transfer</li>
+                        <li>Collaborate with organizations for placement opportunities</li>
+                        <li>Cultivate leadership through club competitions</li>
+                    </ul>
+                </div>
+                <div class="card-team-member">
+                    <div class="team-image-wrapper">
+                        <div class="team-image"><img src="../assets/aakhib.jpeg" alt="V.S.Md.Aakhib"></div>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-role">Club Head</div>
+                        <h3 class="team-name">V.S.Md.Aakhib</h3>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+
+    <hr class="simple-separator">
+
+    <!-- Founders Section -->
+    <section class="founders-section">
+        <div class="cv-header-pill">
+            <h2 class="cv-main-title">Club Founders</h2>
+        </div>
+        <div class="founders-grid">
+            <div class="founder-card fade-up">
+                <div>
+                    <img class="founder-avatar" src = "../assets/IMG_20240830_215445 - CH21B021 KUSHAL GOYAL.jpg"/>
+                </div>
+                <span class="founder-badge">Co-Founder</span>
+                <div class="founder-name">Kushal Goyal</div>
+            </div>
+            <div class="founder-card fade-up">
+                <div>
+                    <img class="founder-avatar" src = "../assets/WhatsApp Image 2024-08-29 at 22.20.19_3eedc8ee - CH21B004 ADARSH DWIVEDI.jpg"/>
+                </div>
+                <span class="founder-badge">Co-Founder</span>
+                <div class="founder-name">Adarsh Dwivedi</div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="simple-separator">
+
+    <!-- Year Switcher -->
+    <div class="year-switcher-wrapper">
+        <span class="year-switcher-label">Explore Our Teams</span>
+        <div class="year-switcher-tabs">
+            <button class="year-tab active" onclick="switchYear('2025')" id="tab-2025">2025 – 2026</button>
+            <button class="year-tab" onclick="switchYear('2024')" id="tab-2024">2024 – 2025</button>
+        </div>
+    </div>
+
+    
+
+    <!-- ===== 2025-2026 TEAM ===== -->
+    <div id="panel-2025" class="team-year-panel active">
+    <section id="cv-section" class="cv-wrapper">
+        <div class="cv-header-pill">
+            <h2 class="cv-main-title">Club Verticals</h2>
+        </div>
+
+        <div class="cv-cards-grid">
+            <div class="cv-vertical-card cv-events cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Events & Management</div>
+                        <ul class="cv-list">
+                            <li>Plan and execute all club events</li>
+                            <li>Manage budgets, timelines & logistics</li>
+                            <li>Coordinate with sponsors & participants</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/IMG_20250408_101629 - CH23B024 MUNAGALA KEDHAR REDDY.jpg" alt="Events Head">
+                        </div>
+                        <span class="cv-name-label">Kedhar Reddy</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20250109_114740_079 - CH23B035 S SRIDHARSHAN.webp" alt="Co 1"></div><span class="cv-name-sub">Sridharshan</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20241209_162411 - CH23B014 HARISH ARAVINTH K M.jpg" alt="Co 2"></div><span class="cv-name-sub">Harish Aravinth</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20250221_193024 - CH24B013 HARSH PRAVIN DUDHE.jpg" alt="Co 3"></div><span class="cv-name-sub">Harsh Dudhe</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/sujeetrawanipic - Sujeet Rawani.jpg" alt="Co 4"></div><span class="cv-name-sub">Sujeet Rawani</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20250928-WA0169 - CH25B031 Revinisetty Venkata Sai Akhil.jpg" alt="Co 4"></div><span class="cv-name-sub">Sai Akhil</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-vertical-card cv-digital cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Digital Media</div>
+                        <ul class="cv-list">
+                            <li>Create graphics, videos & posts</li>
+                            <li>Manage social media accounts</li>
+                            <li>Handle club branding & promotion</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/DocScanner 7 Apr 2025 22-51 - CH23B017 KARTIK GAUR.jpg" alt="Digital Head">
+                        </div>
+                        <span class="cv-name-label">Kartik Gaur</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_1108 - CH23B019 KEVIN PRASHAN.JPG" alt="Co 1"></div><span class="cv-name-sub">Kevin Prashan</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20250223-WA0094~2 - CH23B005 CHILAKA ANAND SUNHITH.jpg" alt="Co 1"></div><span class="cv-name-sub">Anand Sunhith</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/Chemical club photo.jpg - CH23B001 ARCHITA SARDAR.jpg" alt="Co 2"></div><span class="cv-name-sub">Archita</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/20250930_210400 - CH25B022 Maduri Mukesh.jpg" alt="Co 4"></div><span class="cv-name-sub">Mukesh Maduri</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-vertical-card cv-ideation cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Ideation</div>
+                        <ul class="cv-list">
+                            <li>Brainstorm new ideas & projects</li>
+                            <li>Conduct creative workshops</li>
+                            <li>Develop concepts for initiatives</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/rushikesh_CH23B033 - CH23B033 RUSHIKESH SANJAYRAO AMALE.jpg" alt="Ideation Head">
+                        </div>
+                        <span class="cv-name-label">Rushikesh Amale</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/Hema_Image - CH23B034 S HEMA SHREE.jpg" alt="Co 1"></div><span class="cv-name-sub">Hema Shree</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/WhatsApp Image 2025-07-23 at 09.07.08_1a5f40f0.jpg" alt="Co 2"></div><span class="cv-name-sub">Pramod</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20250709-WA0007 - CH24B027 PILLA SAI SATHWIK.jpg" alt="Co 3"></div><span class="cv-name-sub">Sai Sathwik</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20250929_235910 - CH25B017 Karnati Kavya Sree.jpg" alt="Co 4"></div><span class="cv-name-sub">Kavya Sree</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-vertical-card cv-networking cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Networking</div>
+                        <ul class="cv-list">
+                            <li>Build industry & alumni connections</li>
+                            <li>Organize meetups & guest sessions</li>
+                            <li>Facilitate professional opportunities</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/photo - CH23B008 DHARMESH S.jpg" alt="Networking Head">
+                        </div>
+                        <span class="cv-name-label">Dharmesh</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_1381 - CH24B021 MANDALI THARSHITH.jpeg" alt="Co 1"></div><span class="cv-name-sub">Tharshith</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_4572.HEIC - CH24B029 RANAYESH ROY.jpg" alt="Co 2"></div><span class="cv-name-sub">Ranayesh Roy</span></div> 
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_0983 - CH25B021 Lingam Laxman.jpeg" alt="Co 4"></div><span class="cv-name-sub">Lingam Laxman</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web Dev Section 2025-26 -->
+        <div class="cv-cards-grid" style="margin-top:30px; grid-template-columns: 1fr;">
+            <div class="cv-vertical-card cv-webdev cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Web Development</div>
+                        <ul class="cv-list">
+                            <li>Build and maintain the club website</li>
+                            <li>Develop digital tools & internal platforms</li>
+                            <li>Ensure smooth online presence for the club</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/rushikesh_CH23B033 - CH23B033 RUSHIKESH SANJAYRAO AMALE.jpg" alt="Ideation Head">
+                        </div>
+                        <span class="cv-name-label">Rushikesh Amale</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/Hema_Image - CH23B034 S HEMA SHREE.jpg" alt="Co 1"></div><span class="cv-name-sub">Hema Shree</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20241209_162411 - CH23B014 HARISH ARAVINTH K M.jpg" alt="Co 2"></div><span class="cv-name-sub">Harish Aravinth</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20250709-WA0007 - CH24B027 PILLA SAI SATHWIK.jpg" alt="Co 4"></div><span class="cv-name-sub">Sai Sathwik</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mentors Section 2025-26 -->
+        <div class="cv-header-pill" style="margin-top:50px;">
+            <h2 class="cv-main-title">Mentors</h2>
+        </div>
+        <div class="cv-cards-grid" style="grid-template-columns: 1fr;">
+            <div class="cv-vertical-card cv-mentors cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Mentorship</div>
+                        <ul class="cv-list">
+                            <li>Guide juniors through academic & club activities</li>
+                            <li>Provide peer-to-peer knowledge transfer</li>
+                            <li>Support new members in settling into the club</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">MENTORS</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/20241101_000946 - CH22B020 KUSHAGRA AGARWAL.jpg" alt="Co 1"></div><span class="cv-name-sub">Kushagra</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20250712-WA0001 - CH25D008 T Prathyusha.jpg" alt="Co 2"></div><span class="cv-name-sub">Prathyusha</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/1736829827562 - CH22D501 Nayuni Vandana.jpg" alt="Co 2"></div><span class="cv-name-sub">Vandana</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/Passport photo latest - CH24D510 Ankalugari Rahul Yadav.JPG" alt="Co 4"></div><span class="cv-name-sub">Rahul</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2024-25 Leadership -->
+        <div class="cv-header-pill" style="margin-top:50px;">
+            <h2 class="cv-main-title">Leadership</h2>
+        </div>
+        <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:20px; margin-bottom:40px;">
+            <div class="founder-card fade-up">
+                <div>
+                    <img class="founder-avatar" src = "../assets/aakhib.jpeg"/>
+                </div>
+                <span class="founder-badge">Club Head</span>
+                <div class="founder-name">V.S.Md.Aakhib</div>
+            </div>
+        </div>
+
+    </section>
+    </div>
+    <!-- END 2025-26 PANEL -->
+
+    <!-- ===== 2024-2025 TEAM ===== -->
+    <div id="panel-2024" class="team-year-panel">
+    <section class="cv-wrapper">
+        <div class="cv-header-pill">
+            <h2 class="cv-main-title">Club Verticals</h2>
+        </div>
+        <div class="cv-cards-grid">
+            <div class="cv-vertical-card cv-events cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Events & Management</div>
+                        <ul class="cv-list">
+                            <li>Plan and execute all club events</li>
+                            <li>Manage budgets, timelines & logistics</li>
+                            <li>Coordinate with sponsors & participants</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/CH21B037 - CH21B037 THEEGEREDDY SUNIDHI.jpg" alt="Events Head">
+                        </div>
+                        <span class="cv-name-label">Sunidhi</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/Untitled design - CH22B038 SUMIT KUMAR PASWAN.png" alt="Co 1"></div><span class="cv-name-sub">Sumit</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20231202_194246 - CH21B012 BHIMPALLI HAARIKA.jpg" alt="Co 2"></div><span class="cv-name-sub">Haarika</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/photo - CH22B026 PALAK KHANDELWAL.jpg" alt="Co 2"></div><span class="cv-name-sub">Palak</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-vertical-card cv-digital cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Digital Media</div>
+                        <ul class="cv-list">
+                            <li>Create graphics, videos & posts</li>
+                            <li>Manage social media accounts</li>
+                            <li>Handle club branding & promotion</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/Prince Kumar - CH21B028.jpg" alt="Digital Head">
+                        </div>
+                        <span class="cv-name-label">Prince Kumar</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20240402-WA0012 (1) - CH23B008 DHARMESH S.jpg" alt="Co 1"></div><span class="cv-name-sub">Dharmesh</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20240202_005013 - CH22B031 RAJAN RAJ.jpg" alt="Co 1"></div><span class="cv-name-sub">Rajan Raj</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/dummy_photo.jpg" alt="Co 2"></div><span class="cv-name-sub">Aditya</span></div>
+            
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-vertical-card cv-ideation cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Ideation</div>
+                        <ul class="cv-list">
+                            <li>Brainstorm new ideas & projects</li>
+                            <li>Conduct creative workshops</li>
+                            <li>Develop concepts for initiatives</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/Aditi_compress - CH21B005 ADITI P.jpg" alt="Ideation Head">
+                        </div>
+                        <span class="cv-name-label">Aditi</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG-20240726-WA0067 - CH22B027 PREETHA SELVAKUMAR.jpg" alt="Co 1"></div><span class="cv-name-sub">Preetha</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/20240723_084149 - CH23B040 VELAVALI SHAIK MOHAMMAD AAKHIB.jpg" alt="Co 2"></div><span class="cv-name-sub">Aakhib</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cv-vertical-card cv-networking cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Networking</div>
+                        <ul class="cv-list">
+                            <li>Build industry & alumni connections</li>
+                            <li>Organize meetups & guest sessions</li>
+                            <li>Facilitate professional opportunities</li>
+                        </ul>
+                    </div>
+                    <div class="cv-right">
+                        <div class="cv-avatar-main">
+                            <img src="../assets/WhatsApp_Image_2024-08-06_at_16.00.00_1bdb959b-removebg-preview - CH22B023 MHATRE YUVRAJ RAMESH.png" alt="Networking Head">
+                        </div>
+                        <span class="cv-name-label">Yuvraj Mhatre</span>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">Vertical Team</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/1000175239 - CH22B013 GAYATHRI GANDHY.jpg" alt="Co 1"></div><span class="cv-name-sub">Gayathri</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/GauravR - CH23B012 GAURAV KANKREJ.jpeg" alt="Co 2"></div><span class="cv-name-sub">Gaurav</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20240829_052700 - CH22B009 BOMMULURI SAI KAMALA SOUMYA.jpg" alt="Co 4"></div><span class="cv-name-sub">Soumya</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-header-pill" style="margin-top:50px;">
+            <h2 class="cv-main-title">Mentors</h2>
+        </div>
+        <div class="cv-cards-grid" style="grid-template-columns: 1fr;">
+            <div class="cv-vertical-card cv-mentors cv-fade-up">
+                <div class="cv-card-top">
+                    <div class="cv-left">
+                        <div class="cv-tag">Mentorship</div>
+                        <ul class="cv-list">
+                            <li>Guide juniors through academic & club activities</li>
+                            <li>Provide peer-to-peer knowledge transfer</li>
+                            <li>Support new members in settling into the club</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cv-team-divider">
+                    <span class="cv-team-tag">MENTORS</span>
+                    <div class="cv-co-grid">
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/Passport photo latest - CH24D510 Ankalugari Rahul Yadav.JPG" alt="Co 1"></div><span class="cv-name-sub">Rahul</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/WhatsApp Image 2024-08-29 at 22.20.19_3eedc8ee - CH21B004 ADARSH DWIVEDI.jpg" alt="Co 2"></div><span class="cv-name-sub">Adarsh</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20240830_215445 - CH21B021 KUSHAL GOYAL.jpg" alt="Co 4"></div><span class="cv-name-sub">Kushal</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20240829_220248 - CH21D002 BORAVELLI JOSEPH ABHISHEKA RAO.jpg" alt="Co 2"></div><span class="cv-name-sub">Joseph</span></div>
+                        <div class="cv-co-item"><div class="cv-avatar-sub"><img src="../assets/IMG_20240805_083027_483 - Lokeshwaran P CH23M102.jpg" alt="Co 4"></div><span class="cv-name-sub">Lokeshwaran</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 2024-25 Leadership -->
+        <div class="cv-header-pill" style="margin-top:50px;">
+            <h2 class="cv-main-title">Leadership</h2>
+        </div>
+        <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:20px; margin-bottom:40px;">
+            <div class="founder-card fade-up">
+                <div>
+                    <img class="founder-avatar" src = "../assets/IMG_20211105_122710_847 - kushagra - 2024.jpg"/>
+                </div>
+                <span class="founder-badge">Club Head</span>
+                <div class="founder-name">Kushagra Agarwal</div>
+            </div>
+        </div>
+
+    </section>
+    </div>
+    <!-- END 2024-25 PANEL -->
+
+    <div class="fb-section-container">
+        <button id="openFeedbackBtn" class="fb-trigger-btn">Give Feedback Here</button>
+    </div>
+
+    <div id="feedbackModal" class="fb-modal-overlay">
+        <div class="fb-modal-content">
+            <div class="fb-modal-header">
+                <h2>Help us grow!</h2>
+            </div>
+            <form id="feedbackForm" class="fb-form-body">
+                <input type="text" placeholder="Name" class="fb-input" required>
+                <select class="fb-select" required>
+                    <option value="" disabled selected>Category</option>
+                    <option value="general">General Feedback</option>
+                    <option value="event">Event Suggestion</option>
+                    <option value="technical">Technical Issue</option>
+                    <option value="others">Others</option>
+                </select>
+                <textarea placeholder="Message" rows="4" class="fb-textarea" required></textarea>
+                <button type="submit" class="fb-submit-btn">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="successToast" class="fb-toast">
+        Thank you! Your feedback has been sent to the ChEC Team.
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        function initVerticalsAnimation() {
+            const cvObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('cv-active');
+                        cvObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.cv-fade-up').forEach(el => cvObserver.observe(el));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initVerticalsAnimation();
+            const simpleObs = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, { threshold: 0.2 });
+            document.querySelectorAll(".simple-separator").forEach((el) => simpleObs.observe(el));
+        });
+
+        const fbModal = document.getElementById("feedbackModal");
+        const fbOpenBtn = document.getElementById("openFeedbackBtn");
+        const fbForm = document.getElementById("feedbackForm");
+        const fbToast = document.getElementById("successToast");
+
+        fbOpenBtn.onclick = () => fbModal.style.display = "flex";
+        window.onclick = (event) => { if (event.target == fbModal) fbModal.style.display = "none"; };
+        fbForm.onsubmit = (e) => {
+            e.preventDefault(); 
+            fbModal.style.display = "none";
+            fbToast.classList.add("show");
+            fbForm.reset();
+            setTimeout(() => fbToast.classList.remove("show"), 3000);
+        };
+
+        function switchYear(year) {
+            document.querySelectorAll('.team-year-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('panel-' + year).classList.add('active');
+            document.getElementById('tab-' + year).classList.add('active');
+            // Re-trigger scroll animations for newly visible panel
+            setTimeout(() => {
+                const cvObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('cv-active');
+                            cvObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('#panel-' + year + ' .cv-fade-up').forEach(el => {
+                    el.classList.remove('cv-active');
+                    cvObserver.observe(el);
+                });
+            }, 50);
+        }
+    </script>
+</body>
+</html>

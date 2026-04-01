@@ -1,0 +1,181 @@
+/* --- ChEC Uniform Design System --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+    --c-black-bean: #2D0C0C;
+    --c-white: #FFFFFF;
+    --c-platinum: #DBD8D8;
+    --c-onyx: #2E2E2E;
+    --c-firebrick: #7E0101;
+    --c-auburn: #6F0505;
+    --radius: 2rem;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--c-onyx);
+    background-color: #fdfbf9;
+    /* The "Chemical Haze" Effect */
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(195, 181, 167, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(126, 1, 1, 0.08) 0%, transparent 40%);
+    background-attachment: fixed;
+    line-height: 1.6;
+}
+
+.wrap { max-width: 1300px; margin: 0 auto; padding: 40px 20px 100px; }
+
+/* --- Uniform Header Section --- */
+header { margin-bottom: 60px; text-align: left; }
+
+header .title-box {
+    background: linear-gradient(135deg, var(--c-black-bean), var(--c-auburn));
+    padding: 24px 40px;
+    border-radius: var(--radius);
+    border-left: 10px solid var(--c-firebrick); /* Consistent accent */
+    box-shadow: 0 15px 35px rgba(45, 12, 12, 0.2);
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--c-white);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin: 0;
+}
+
+header p { 
+    color: var(--c-onyx); 
+    font-weight: 500; 
+    font-style: italic; 
+    border-left: 3px solid var(--c-rosetaupe);
+    padding-left: 15px;
+}
+
+/* --- Grid Layout --- */
+.grid { display: grid; gap: 30px; }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* --- Research Cards --- */
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid var(--c-platinum);
+    border-radius: var(--radius);
+    padding: 30px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--c-firebrick);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--c-firebrick);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 15px 0;
+    text-transform: uppercase;
+}
+
+.desc-box {
+    background: white;
+    border: 1px solid var(--c-platinum);
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 0.88rem;
+    color: #4b5563;
+    max-height: 110px;
+    overflow-y: auto;
+}
+
+/* --- Faculty List Mini-Cards --- */
+.prof-list { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; flex: 1; }
+
+.prof {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid var(--c-firebrick);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.prof .name { font-weight: 700; color: var(--c-black-bean); font-size: 0.95rem; }
+.prof .role { font-size: 0.75rem; color: #64748b; font-weight: 500; }
+
+/* --- Actions & Pills --- */
+.actions { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.btn {
+    background-color: var(--c-firebrick);
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover { background-color: var(--c-black-bean); transform: scale(1.05); }
+
+.pill {
+    font-size: 0.7rem;
+    background: #fef2f2;
+    align-self: flex-start;
+    color: var(--c-firebrick);
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+
+.cta .big {
+    background: var(--c-black-bean);
+    color: white;
+    border: none;
+    padding: 16px 45px;
+    border-radius: 50px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-left: 5px solid var(--c-firebrick);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cta .big:hover { background: var(--c-firebrick); transform: translateY(-3px); }
