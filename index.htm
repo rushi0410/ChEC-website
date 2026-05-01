@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chemical Engineering Club (ChEC) — Conveyor Carousel in home page banner section</title>
+  <style>
+    :root {
+      --slide-duration-ms: 2500;
+      /* time each slide is visible (2.5 sec) */
+      --transition-duration-ms: 800;
+      /* time for slide transition animation */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Background Conveyor Carousel ---------- */
+    .bg-carousel {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .carousel-viewport {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: stretch;
+      transform: translateX(0);
+      will-change: transform;
+      transition: transform 800ms ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100vw;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .carousel-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.50) 100%);
+      pointer-events: none;
+    }
+
+    .site-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(15, 15, 15, 0.75) 0%, rgba(30, 30, 30, 0.68) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ---------- Hero content ---------- */
+    .content {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      pointer-events: auto;
+    }
+
+    .hero {
+      width: min(980px, 92%);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 28px;
+      padding: 42px 36px;
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+    }
+
+    h1 {
+      font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+      color: #fff;
+      margin-bottom: 0.9rem;
+      line-height: 1.1;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .tagline {
+      color: #e5e5e5;
+      font-size: clamp(.95rem, 1.6vw, 1.2rem);
+      margin-bottom: 1.8rem;
+      opacity: 0.96;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 0.95rem 2rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 45px rgba(102, 126, 234, 0.45);
+    }
+
+    .info-section {
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.3rem;
+    }
+
+    .info-text {
+      color: #c8c8c8;
+      text-align: center;
+      font-size: .95rem;
+      line-height: 1.6;
+    }
+
+    /* floating elements */
+    .floating {
+      position: absolute;
+      z-index: 2;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8px);
+      width: 100px;
+      height: 100px;
+      top: 15%;
+      right: 10%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-2 {
+      width: 80px;
+      height: 80px;
+      top: auto;
+      bottom: 20%;
+      right: auto;
+      left: 8%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg)
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(5deg)
+      }
+    }
+
+    /* Responsiveness :))*/
+    @media (max-width:768px) {
+      .hero {
+        padding: 28px 20px;
+        border-radius: 20px
+      }
+
+      .floating,
+      .floating-2 {
+        display: none
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-track {
+        transition: none !important
+      }
+
+      .floating,
+      .floating-2 {
+        animation: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background carousel -->
+  <div class="bg-carousel" aria-hidden="true">
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Slides populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <div class="site-overlay" aria-hidden="true"></div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="hero" role="main" aria-label="Welcome to Chemical Engineering Club">
+      <h1>Welcome to the Chemical Engineering Club (ChEC)</h1>
+      <p class="tagline">Bridging the gap between classroom learning and real-world engineering.</p>
+      <button class="cta" onclick="joinCommunity()">Join our community</button>
+
+    </div>
+
+    <div class="floating" title="decorative"></div>
+    <div class="floating floating-2" title="decorative"></div>
+  </div>
+
+  <script>
+
+
+// BG IMAGES TAKEN FROM SU=HUTTERSTOCY SPECIALLY BY ME:)) PLS KEEP THIS IN OUR FINAL WEBSITE
+// THANKS TO SHUTTERSTOCK FOR 5 IMAGES AND FREEP!K FOR 1 IMAGE :)))
+    const slides = [
+
+      "	https://www.shutterstock.com/image-photo/oil-refinery-industry-plant-dramatic-600w-1045903693.jpg",
+
+    
+      "	https://www.shutterstock.com/image-photo/oil-refin…es-chemical-plants-industrial-600w-2470556115.jpg",
+
+  
+      "https://www.shutterstock.com/image-photo/refinery-plant-equipment-pipe-line-600w-1890593197.jpg",
+
+      
+      "https://img.freepik.com/premium-photo/engineers-wo…sses_1314467-88060.jpg?semt=ais_hybrid&w=740&q=80",
+
+     
+      "	https://www.shutterstock.com/image-photo/oil-refinery-plant-sunset-gas-260nw-2511062967.jpg",
+
+    
+      "	https://www.shutterstock.com/image-photo/two-petro…emical-contractors-closing-deal-600w-85912450.jpg"
+    ];
+
+    // Timing configuration
+    const slideDuration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--slide-duration-ms')) || 2500;
+    const transitionDuration = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--transition-duration-ms')) || 800;
+
+    const track = document.getElementById('carouselTrack');
+    let currentIndex = 0;
+    let intervalId = null;
+    let isPaused = false;
+    const totalSlides = slides.length;
+
+    // Create slide element
+    function createSlide(url) {
+      const div = document.createElement('div');
+      div.className = 'carousel-slide';
+      div.style.backgroundImage = `url("${url}")`;
+      return div;
+    }
+
+    // Initialize: create original slides + one clone set for infinite loop
+    function initSlides() {
+      track.innerHTML = ''; // clear existing
+
+      // Add original 6 slides
+      slides.forEach(url => track.appendChild(createSlide(url)));
+
+      // Add clone of first slide for seamless transition
+      track.appendChild(createSlide(slides[0]));
+
+      currentIndex = 0;
+      track.style.transform = 'translateX(0)';
+    }
+
+    // Move to next slide
+    function goToNextSlide() {
+      if (isPaused) return;
+
+      currentIndex++;
+      const translateX = -currentIndex * 100; // each slide is 100vw
+
+      track.style.transition = `transform ${transitionDuration}ms ease-in-out`;
+      track.style.transform = `translateX(${translateX}vw)`;
+
+      // If we've reached the clone (index 6), reset to real first slide after transition
+      if (currentIndex === totalSlides) {
+        setTimeout(() => {
+          track.style.transition = 'none';
+          currentIndex = 0;
+          track.style.transform = 'translateX(0)';
+
+          // Re-enable transition after a brief moment
+          setTimeout(() => {
+            track.style.transition = `transform ${transitionDuration}ms ease-in-out`;
+          }, 50);
+        }, transitionDuration);
+      }
+    }
+
+    // Start automatic carousel
+    function startCarousel() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      intervalId = setInterval(goToNextSlide, slideDuration);
+    }
+
+    // Stop carousel
+    function stopCarousel() {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    }
+
+    // Pause on hover
+    track.parentElement.parentElement.addEventListener('mouseenter', () => {
+      isPaused = true;
+    });
+
+    track.parentElement.parentElement.addEventListener('mouseleave', () => {
+      isPaused = false;
+    });
+
+    // Handle window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const currentTranslate = -currentIndex * 100;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${currentTranslate}vw)`;
+        setTimeout(() => {
+          track.style.transition = `transform ${transitionDuration}ms ease-in-out`;
+        }, 50);
+      }, 250);
+    });
+
+    // CTA button action
+    function joinCommunity() {
+      alert('Welcome to ChEC! Redirecting to community page...');
+      // window.location.href = '/community';
+    }
+
+    // Initialize and start
+    initSlides();
+    setTimeout(startCarousel, 800); // Small delay before first transition
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', stopCarousel);
+  </script>
+</body>
+
+</html>
